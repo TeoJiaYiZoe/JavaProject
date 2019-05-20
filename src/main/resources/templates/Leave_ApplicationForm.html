@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>This is the form page</h1>
+	<form th:object="${leave_application}" th:action="@{/leave_applications}"
+		method="post">
+		<fieldset>
+			Staff ID:<input type="text">
+		</fieldset>
+		<fieldset>
+			Leave Type: 
+			<select th:field="*{leavetype_id}">
+				<option th:each="leave_type:${leave_types}" th:value="${leave_type.leavetype_id}"
+					th:text="${leave_type.type_name }" th:selected="${leavetype_id==leave_type.leavetype_id}"></option>
+			</select>
+		</fieldset>
+		<fieldset>
+			Start Date:<input type="date" th:field="*{start_date}">
+		</fieldset>
+		<fieldset>
+			End Date:<input type="date" th:field="*{end_date}">
+		</fieldset>
+		<fieldset>
+			Reason:<input type="text" th:field="*{reason}">
+		</fieldset>
+		<fieldset>
+			Work Instruction:<input type="text" th:field="*{work_instruction}">
+		</fieldset>
+		<fieldset>
+			Contact Details:<input type="text" th:field="*{contact_details}">
+		</fieldset>
+		<fieldset>
+			<input type="submit" name="Save" />
+		</fieldset>
+	</form>
+</body>
+</html>
