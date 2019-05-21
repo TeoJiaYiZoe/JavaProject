@@ -9,5 +9,5 @@ import sg.nus.iss.mvc.model.Staff;
 @Repository
 public interface StaffRepository extends JpaRepository<Staff,String>{
 
-	public Staff findByStaffname(String staffname);
+	public Staff findByStaffName(String staffname);
 }

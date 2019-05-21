@@ -9,29 +9,29 @@
 	<form th:object="${leave_application}" th:action="@{/leave_applications}"
 		method="post">
 		<fieldset>
-			Staff ID:<input type="text">
+			Staff Name:<input type="text" th:value="${session.user.getStaffName()}">
 		</fieldset>
 		<fieldset>
 			Leave Type: 
-			<select th:field="*{leavetype_id}">
-				<option th:each="leave_type:${leave_types}" th:value="${leave_type.leavetype_id}"
-					th:text="${leave_type.type_name }" th:selected="${leavetype_id==leave_type.leavetype_id}"></option>
+			<select th:field="*{leavetypeId}">
+				<option th:each="leaveType:${leave_types}" th:value="${leaveType.getTypeId()}"
+					th:text="${leaveType.typeName }" th:selected="${leavetypeId eq leaveType.getTypeId()}"></option>
 			</select>
 		</fieldset>
 		<fieldset>
-			Start Date:<input type="date" th:field="*{start_date}">
+			Start Date:<input type="date" th:field="*{startDate}">
 		</fieldset>
 		<fieldset>
-			End Date:<input type="date" th:field="*{end_date}">
+			End Date:<input type="date" th:field="*{endDate}">
 		</fieldset>
 		<fieldset>
 			Reason:<input type="text" th:field="*{reason}">
 		</fieldset>
 		<fieldset>
-			Work Instruction:<input type="text" th:field="*{work_instruction}">
+			Work Instruction:<input type="text" th:field="*{workInstruction}">
 		</fieldset>
 		<fieldset>
-			Contact Details:<input type="text" th:field="*{contact_details}">
+			Contact Details:<input type="text" th:field="*{contact}">
 		</fieldset>
 		<fieldset>
 			<input type="submit" name="Save" />

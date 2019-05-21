@@ -10,11 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import sg.nus.iss.mvc.model.Staff;
+import sg.nus.iss.mvc.model.User;
 import sg.nus.iss.mvc.repo.StaffRepository;
 
 @Controller
+@SessionAttributes("user")
 public class LoginController {
 
 	private StaffRepository staffRepo;
@@ -26,17 +29,18 @@ public class LoginController {
 
 	@RequestMapping(path = "login", method = RequestMethod.GET)
 	public String loginPage(Model model) {
-		model.addAttribute("staff", new Staff());
+		model.addAttribute("user", new User());
 		return "loginForm";
 	}
 
-	@RequestMapping(path = "main", method = RequestMethod.POST)
-	public String checkid(Staff staff) {
-		Staff user = staffRepo.findByStaffname(staff.getStaff_name());
-		if (user.getPassword().equalsIgnoreCase(staff.getPassword())) {
-			return "Staffs";
+	@RequestMapping(path = "homepage", method = RequestMethod.POST)
+	public String checkid(User user, Model model) {
+		Staff staff = staffRepo.findByStaffName(user.getUsername());
+		if (staff.getPassword().equalsIgnoreCase(user.getPassword())) {
+			model.addAttribute("user", staff);
+			return "homepage";
 		} else {
-			return "Leave_ApplicationForm";
+			return "loginForm";
 		}
 	}
 }

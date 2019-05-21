@@ -19,17 +19,19 @@ import org.hibernate.validator.constraints.Length;
 public class Staff {
 
 	@Id
-	private int staff_id;
+	@Column(name="id")
+	private int staffId;
 	@NotEmpty
 	@Size(min = 2, max =50)
-	@Column(name="staff_name")
-	private String staffname;
-	@NotEmpty
-	private int designation_id;
+	@Column(name="name")
+	private String staffName;
+	@Column(name="designation_id")
+	private int designationId;
+	
 	@Length(min = 3)
 	private String password;
-	@OneToMany(targetEntity = Leave_Application.class, mappedBy = "staff")
-	private Collection<Leave_Application> leave_application;
+	@OneToMany(targetEntity = leaveApplication.class, mappedBy = "staff")
+	private Collection<leaveApplication> leave_application;
 	//CONSTRUCTORS
 	public Staff() {
 		super();
@@ -38,34 +40,51 @@ public class Staff {
 	
 	public Staff(String sataff_name, int designation_id, String password) {
 		super();
-		this.staffname = sataff_name;
-		this.designation_id = designation_id;
+		this.staffName = sataff_name;
+		this.designationId = designation_id;
 		this.password = password;
 	}
 	//GETTERS & SETTERS
-	public int getStaff_id() {
-		return staff_id;
+
+	public int getStaffId() {
+		return staffId;
 	}
-	public void setStaff_id(int staff_id) {
-		this.staff_id = staff_id;
+
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
 	}
-	public String getStaff_name() {
-		return staffname;
+
+	public String getStaffName() {
+		return staffName;
 	}
-	public void setStaff_name(String staff_name) {
-		this.staffname = staff_name;
+
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
 	}
-	public int getDesignation_id() {
-		return designation_id;
+
+	public int getDesignationId() {
+		return designationId;
 	}
-	public void setDesignation_id(int designation_id) {
-		this.designation_id = designation_id;
+
+	public void setDesignationId(int designationId) {
+		this.designationId = designationId;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public Collection<leaveApplication> getLeave_application() {
+		return leave_application;
+	}
+
+	public void setLeave_application(Collection<leaveApplication> leave_application) {
+		this.leave_application = leave_application;
+	}
+	
 	
 }
