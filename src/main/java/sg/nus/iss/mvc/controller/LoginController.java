@@ -29,7 +29,7 @@ public class LoginController {
 
 	@RequestMapping(path = "login", method = RequestMethod.GET)
 	public String loginPage(Model model) {
-		model.addAttribute("user", new User());
+		model.addAttribute("login", new User());
 		return "loginForm";
 	}
 

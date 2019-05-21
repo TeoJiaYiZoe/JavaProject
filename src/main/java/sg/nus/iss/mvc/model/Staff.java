@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -32,6 +34,8 @@ public class Staff {
 	private String password;
 	@OneToMany(targetEntity = leaveApplication.class, mappedBy = "staff")
 	private Collection<leaveApplication> leave_application;
+	
+	
 	//CONSTRUCTORS
 	public Staff() {
 		super();

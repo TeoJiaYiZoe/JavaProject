@@ -9,7 +9,7 @@
 	<form th:object="${leave_application}" th:action="@{/leave_applications}"
 		method="post">
 		<fieldset>
-			Staff Name:<input type="text" th:value="${session.user.getStaffName()}">
+			Staff Name:<label th:text="${session.user.getStaffName()}"></label>
 		</fieldset>
 		<fieldset>
 			Leave Type: 
