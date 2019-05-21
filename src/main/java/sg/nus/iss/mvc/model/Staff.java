@@ -35,7 +35,6 @@ public class Staff {
 	@OneToMany(targetEntity = leaveApplication.class, mappedBy = "staff")
 	private Collection<leaveApplication> leave_application;
 	
-	
 	//CONSTRUCTORS
 	public Staff() {
 		super();
