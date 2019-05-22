@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.model.User;
-import sg.nus.iss.mvc.repo.StaffRepository;
+import sg.nus.iss.mvc.repo.staffRepository;
 
 @Controller
 @SessionAttributes("user")
 public class LoginController {
 
-	private StaffRepository staffRepo;
+	private staffRepository staffRepo;
 
 	@Autowired
-	public void setStaffRepo(StaffRepository staffRepo) {
+	public void setStaffRepo(staffRepository staffRepo) {
 		this.staffRepo = staffRepo;
 	}
 

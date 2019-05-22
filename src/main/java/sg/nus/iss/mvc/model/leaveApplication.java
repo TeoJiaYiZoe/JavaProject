@@ -1,4 +1,6 @@
 package sg.nus.iss.mvc.model;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -30,18 +33,18 @@ public class leaveApplication {
 
 	@Column(name="start_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date startDate;
+	private LocalDate startDate;
 	@Column(name="end_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date endDate;
+	private LocalDate endDate;
 	private String reason;
 	@Column(name="work_instruction")
 	private String workInstruction;
 	//private String contact;
 	private int contact;
-	
-	@Column(name="leavetype_id")
-	private int leavetypeId;
+	@ManyToOne
+	@JoinColumn(name="leavetypeId")
+	private leaveType leavetype;
 	private String status;
 	private String comment;
 	public leaveApplication() {
@@ -49,8 +52,8 @@ public class leaveApplication {
 		this.status = "APPLIED";
 		// TODO Auto-generated constructor stub
 	}
-	public leaveApplication(Staff staff, Date startDate, Date endDate, String reason, String workInstruction,
-			int contact, int leavetypeId, String status, String comment) {
+	public leaveApplication(Staff staff, LocalDate startDate, LocalDate endDate, String reason, String workInstruction,
+			int contact, leaveType leavetype, String status, String comment) {
 		super();
 		this.staff = staff;
 		this.startDate = startDate;
@@ -58,7 +61,7 @@ public class leaveApplication {
 		this.reason = reason;
 		this.workInstruction = workInstruction;
 		this.contact = contact;
-		this.leavetypeId = leavetypeId;
+		this.leavetype = leavetype;
 		this.status = "APPLIED";
 		this.comment = comment;
 	}
@@ -74,16 +77,16 @@ public class leaveApplication {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 	public String getReason() {
@@ -104,11 +107,12 @@ public class leaveApplication {
 	public void setContact(int contact) {
 		this.contact = contact;
 	}
-	public int getLeavetypeId() {
-		return leavetypeId;
+	
+	public leaveType getLeavetype() {
+		return leavetype;
 	}
-	public void setLeavetypeId(int leavetypeId) {
-		this.leavetypeId = leavetypeId;
+	public void setLeavetype(leaveType leavetype) {
+		this.leavetype = leavetype;
 	}
 	public String getStatus() {
 		return status;
@@ -122,6 +126,4 @@ public class leaveApplication {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
-	
 }

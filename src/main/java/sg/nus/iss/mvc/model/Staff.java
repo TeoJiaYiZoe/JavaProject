@@ -35,6 +35,10 @@ public class Staff {
 	@OneToMany(targetEntity = leaveApplication.class, mappedBy = "staff")
 	private Collection<leaveApplication> leave_application;
 	
+	@OneToOne
+	@JoinColumn(name="boss_id")
+	private Staff staff;
+	
 	//CONSTRUCTORS
 	public Staff() {
 		super();

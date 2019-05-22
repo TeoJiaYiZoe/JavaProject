@@ -13,7 +13,7 @@
 		</fieldset>
 		<fieldset>
 			Leave Type: 
-			<select th:field="*{leavetypeId}">
+			<select th:field="*{leavetype}">
 				<option th:each="leaveType:${leave_types}" th:value="${leaveType.getTypeId()}"
 					th:text="${leaveType.typeName }" th:selected="${leavetypeId eq leaveType.getTypeId()}"></option>
 			</select>

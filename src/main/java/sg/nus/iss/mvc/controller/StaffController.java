@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import sg.nus.iss.mvc.model.Staff;
-import sg.nus.iss.mvc.repo.StaffRepository;
+import sg.nus.iss.mvc.repo.staffRepository;
 
 @Controller
 public class StaffController {
 
-	private StaffRepository staffRepo;
+	private staffRepository staffRepo;
 
 	@Autowired
-	public void setStaffRepo(StaffRepository staffRepo) {
+	public void setStaffRepo(staffRepository staffRepo) {
 		this.staffRepo = staffRepo;
 	}
 	
