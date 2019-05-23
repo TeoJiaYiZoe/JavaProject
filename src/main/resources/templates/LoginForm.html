@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>This is the login page</h1>
-	<form th:object="${user}" th:action="@{/homepage}" method="post">
+	<form th:object="${User}" th:action="@{/homepage}" method="post">
 		<fieldset>
 			Name:<input type="text" th:field="*{username}">
 		</fieldset>

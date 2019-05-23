@@ -27,13 +27,14 @@ public class Staff {
 	@Size(min = 2, max =50)
 	@Column(name="name")
 	private String staffName;
-	@Column(name="designation_id")
-	private int designationId;
+	@OneToOne
+	@JoinColumn(name="designation_id")
+	private Designation designation;
 	
 	@Length(min = 3)
 	private String password;
-	@OneToMany(targetEntity = leaveApplication.class, mappedBy = "staff")
-	private Collection<leaveApplication> leave_application;
+	@OneToMany(targetEntity = LeaveApplication.class, mappedBy = "staff")
+	private Collection<LeaveApplication> leave_application;
 	
 	@OneToOne
 	@JoinColumn(name="boss_id")
@@ -45,10 +46,10 @@ public class Staff {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Staff(String sataff_name, int designation_id, String password) {
+	public Staff(String staff_name,Designation designation, String password) {
 		super();
-		this.staffName = sataff_name;
-		this.designationId = designation_id;
+		this.staffName = staff_name;
+		this.designation = designation;
 		this.password = password;
 	}
 	//GETTERS & SETTERS
@@ -61,20 +62,20 @@ public class Staff {
 		this.staffId = staffId;
 	}
 
+	public Designation getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(Designation designation) {
+		this.designation = designation;
+	}
+
 	public String getStaffName() {
 		return staffName;
 	}
 
 	public void setStaffName(String staffName) {
 		this.staffName = staffName;
-	}
-
-	public int getDesignationId() {
-		return designationId;
-	}
-
-	public void setDesignationId(int designationId) {
-		this.designationId = designationId;
 	}
 
 	public String getPassword() {
@@ -85,19 +86,20 @@ public class Staff {
 		this.password = password;
 	}
 
-	public Collection<leaveApplication> getLeave_application() {
+	public Collection<LeaveApplication> getLeave_application() {
 		return leave_application;
 	}
 
-	public void setLeave_application(Collection<leaveApplication> leave_application) {
+	public void setLeave_application(Collection<LeaveApplication> leave_application) {
 		this.leave_application = leave_application;
 	}
 
-	@Override
-	public String toString() {
-		return "Staff [staffId=" + staffId + ", staffName=" + staffName + ", designationId=" + designationId
-				+ ", password=" + password + ", leave_application=" + leave_application + ", staff=" + staff + "]";
+	public Staff getStaff() {
+		return staff;
 	}
-	
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 	
 }

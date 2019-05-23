@@ -10,30 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import sg.nus.iss.mvc.model.Staff;
-import sg.nus.iss.mvc.repo.staffRepository;
+import sg.nus.iss.mvc.repo.StaffRepository;
 
 @Controller
 public class StaffController {
 
-	private staffRepository staffRepo;
+	private StaffRepository staffRepo;
 
 	@Autowired
-	public void setStaffRepo(staffRepository staffRepo) {
+	public void setStaffRepo(StaffRepository staffRepo) {
 		this.staffRepo = staffRepo;
 	}
 	
-	@RequestMapping(path = "staff/add", method = RequestMethod.GET)
+	@RequestMapping(path = "Staff/add", method = RequestMethod.GET)
 	public String createStaff(Model model) {
-		model.addAttribute("staff", new Staff());
+		model.addAttribute("Staff", new Staff());
 		return "StaffForm";
 	}
 	
 	@RequestMapping(path = "staffs", method = RequestMethod.POST)
-	public String saveStaff(@Valid Staff staff, BindingResult bindingResult) {
+	public String saveStaff(@Valid Staff Staff, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "StaffForm";
 		}
-		staffRepo.save(staff);
+		staffRepo.save(Staff);
 		return "Staffs";
 	}
 }

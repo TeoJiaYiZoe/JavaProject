@@ -9,33 +9,33 @@ import javax.persistence.ManyToOne;
 
 
 @SuppressWarnings("serial")
-public class leaveBalanceKey implements Serializable{
+public class LeaveBalanceKey implements Serializable{
 
-	private leaveType leavetype;
+	private LeaveType leavetype;
 
 	private Staff staff;
 
-	public leaveBalanceKey() {
+	public LeaveBalanceKey() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public leaveBalanceKey(leaveType leavetype, Staff staff) {
+	public LeaveBalanceKey(LeaveType leavetype, Staff Staff) {
 		super();
 		this.leavetype = leavetype;
-		this.staff = staff;
+		this.staff = Staff;
 	}
 	
 	@Override
 	public String toString() {
-		return "leaveBalanceKey [leavetype=" + leavetype + ", staff=" + staff + "]";
+		return "LeaveBalanceKey [leavetype=" + leavetype + ", Staff=" + staff + "]";
 	}
 
-	public leaveType getLeavetype() {
+	public LeaveType getLeavetype() {
 		return leavetype;
 	}
 
-	public void setLeavetype(leaveType leavetype) {
+	public void setLeavetype(LeaveType leavetype) {
 		this.leavetype = leavetype;
 	}
 
@@ -43,8 +43,8 @@ public class leaveBalanceKey implements Serializable{
 		return staff;
 	}
 
-	public void setStaff(Staff staff) {
-		this.staff = staff;
+	public void setStaff(Staff Staff) {
+		this.staff = Staff;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class leaveBalanceKey implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		leaveBalanceKey other = (leaveBalanceKey) obj;
+		LeaveBalanceKey other = (LeaveBalanceKey) obj;
 		if (leavetype == null) {
 			if (other.leavetype != null)
 				return false;

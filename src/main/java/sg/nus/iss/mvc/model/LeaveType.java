@@ -11,18 +11,18 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="leave_type")
-public class leaveType {
+public class LeaveType {
 
 	@Id
 	@Column(name="id")
 	private int typeId;
 	@Column(name="name")
 	private String typeName;
-	public leaveType() {
+	public LeaveType() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public leaveType(String type_name) {
+	public LeaveType(String type_name) {
 		super();
 		this.typeName = type_name;
 	}
@@ -54,7 +54,7 @@ public class leaveType {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		leaveType other = (leaveType) obj;
+		LeaveType other = (LeaveType) obj;
 		if (typeId != other.typeId)
 			return false;
 		if (typeName == null) {

@@ -11,14 +11,14 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import sg.nus.iss.mvc.model.holiday;
-import sg.nus.iss.mvc.repo.holidayRepository;
+import sg.nus.iss.mvc.model.Holiday;
+import sg.nus.iss.mvc.repo.HolidayRepository;
 
 @Service
-public class holidayServiceImpl implements holidayService{
+public class HolidayServiceImpl implements HolidayService{
 
 	@Resource
-	private holidayRepository holidayRepo;
+	private HolidayRepository holidayRepo;
 	
 	@Override
 	@Transactional
@@ -38,7 +38,7 @@ public class holidayServiceImpl implements holidayService{
 			
 			tempdate = tempdate.plusDays(1);
 		}
-		//for(holiday h: holidays) {
+		//for(Holiday h: holidays) {
 		//	if(h.getDate().isAfter(start) && h.getDate().isBefore(end)) {
 		//		res--;
 		//	}

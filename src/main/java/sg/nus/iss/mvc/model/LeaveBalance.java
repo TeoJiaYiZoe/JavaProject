@@ -14,13 +14,13 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="leave_balance")
-@IdClass(leaveBalanceKey.class)
-public class leaveBalance implements Serializable{
+@IdClass(LeaveBalanceKey.class)
+public class LeaveBalance implements Serializable{
 
 	@Id
 	@ManyToOne
 	@JoinColumn(name="leavetype_id")
-	private leaveType leavetype;
+	private LeaveType leavetype;
 	@Id
 	@ManyToOne
 	@JoinColumn(name="staff_id")
@@ -28,27 +28,27 @@ public class leaveBalance implements Serializable{
 	
 	@Column(name="leave_available")
 	private int balance;
-	public leaveBalance() {
+	public LeaveBalance() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public leaveBalance(leaveType leavetype, Staff staff, int balance) {
+	public LeaveBalance(LeaveType leavetype, Staff Staff, int balance) {
 		super();
 		this.leavetype = leavetype;
-		this.staff = staff;
+		this.staff = Staff;
 		this.balance = balance;
 	}
-	public leaveType getLeavetype() {
+	public LeaveType getLeavetype() {
 		return leavetype;
 	}
-	public void setLeavetype(leaveType leavetype) {
+	public void setLeavetype(LeaveType leavetype) {
 		this.leavetype = leavetype;
 	}
 	public Staff getStaff() {
 		return staff;
 	}
-	public void setStaff(Staff staff) {
-		this.staff = staff;
+	public void setStaff(Staff Staff) {
+		this.staff = Staff;
 	}
 	public int getBalance() {
 		return balance;
@@ -58,7 +58,7 @@ public class leaveBalance implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "leaveBalance [leavetype=" + leavetype + ", staff=" + staff + ", balance=" + balance + "]";
+		return "LeaveBalance [leavetype=" + leavetype + ", Staff=" + staff + ", balance=" + balance + "]";
 	}
 	
 	

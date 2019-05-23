@@ -3,15 +3,15 @@ package sg.nus.iss.mvc.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import sg.nus.iss.mvc.repo.holidayRepository;
+import sg.nus.iss.mvc.repo.HolidayRepository;
 
 @Controller
-public class holidayController {
+public class HolidayController {
 
-	private holidayRepository holidayRepo;
+	private HolidayRepository holidayRepo;
 
 	@Autowired
-	public void setHolidayRepo(holidayRepository holidayRepo) {
+	public void setHolidayRepo(HolidayRepository holidayRepo) {
 		this.holidayRepo = holidayRepo;
 	}
 	

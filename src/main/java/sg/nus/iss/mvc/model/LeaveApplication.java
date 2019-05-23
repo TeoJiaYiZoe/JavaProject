@@ -22,13 +22,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="leave_application")
-public class leaveApplication {
+public class LeaveApplication {
 
 	@Id
 	@Column(name="ID")
 	private int id;
-	//@Column(name="STAFF_ID")
-	//private int staffId;
 	@ManyToOne
 	@JoinColumn(name="staff_id")
 	private Staff staff;
@@ -42,22 +40,20 @@ public class leaveApplication {
 	private String reason;
 	@Column(name="work_instruction")
 	private String workInstruction;
-	//private String contact;
 	private int contact;
-	//@Column(name="LEAVETYPE_ID")
-	//private int leaveTypeId;
 	@ManyToOne
 	@JoinColumn(name="LEAVETYPE_ID")
-	private leaveType leavetype;
+	private LeaveType leavetype;
 	private String status;
 	private String comment;
-	public leaveApplication() {
+	
+	public LeaveApplication() {
 		super();
 		this.status = "APPLIED";
 		// TODO Auto-generated constructor stub
 	}
-	public leaveApplication(Staff staff, LocalDate startDate, LocalDate endDate, String reason, String workInstruction,
-			int contact, leaveType leavetype, String status, String comment) {
+	public LeaveApplication(Staff staff, LocalDate startDate, LocalDate endDate, String reason, String workInstruction,
+			int contact, LeaveType leavetype, String status, String comment) {
 		super();
 		this.staff = staff;
 		this.startDate = startDate;
@@ -113,10 +109,10 @@ public class leaveApplication {
 		this.contact = contact;
 	}
 	
-	public leaveType getLeavetype() {
+	public LeaveType getLeavetype() {
 		return leavetype;
 	}
-	public void setLeavetype(leaveType leavetype) {
+	public void setLeavetype(LeaveType leavetype) {
 		this.leavetype = leavetype;
 	}
 	public String getStatus() {

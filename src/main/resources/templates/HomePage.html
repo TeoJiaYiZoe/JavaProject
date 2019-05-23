@@ -10,5 +10,6 @@
 	<a th:href="@{/leave}">My Leave History</a>
 	<br>
 	<a th:href="@{/leave/balance}">My Leave Balance</a>
+	<label th:text="${session.User.getDesignation().getDesignationName()}"></label>
 </body>
 </html>
