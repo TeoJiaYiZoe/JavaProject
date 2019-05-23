@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit leave</title>
+</head>
+<body>
+	<h1>Edit leave details</h1>
+			<form th:object="${leaveEdit}" th:action="@{/leave}" method="post">
+			
+			<fieldset><input type="hidden" th:field="*{id}" >
+			</fieldset> 
+			<fieldset> StartDate: <input type="text" th:field="*{startDate}">
+				<p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></p> 
+			</fieldset> 
+			<fieldset> EndDate: <input type="text" th:field="*{endDate}">
+			<p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p> 
+			</fieldset> 
+			<fieldset><input type="hidden" th:field="*{status}" >
+			</fieldset> 
+			<fieldset> Reason: <input type="text" th:field="*{reason}"> 
+			<p th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}"></p> 
+			</fieldset>
+			<fieldset> Work Instruction: <input type="text" th:field="*{workInstruction}"> 
+			<p th:if="${#fields.hasErrors('workInstruction')}" th:errors="*{workInstruction}"></p> 
+			</fieldset>
+			<fieldset> Contact: <input type="text" th:field="*{contact}"> 
+			<p th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}"></p> 
+			</fieldset> 
+			<fieldset><input type="hidden" th:field="*{staffId}" >
+			</fieldset>
+			<fieldset><input type="hidden" th:field="*{leaveTypeId}" >
+			</fieldset>
+			<fieldset><input type="hidden" th:field="*{comment}" >
+			</fieldset> 
+			<fieldset> <button type="submit">Save</button> </fieldset>
+			
+			</form>
+</body>
+</html>

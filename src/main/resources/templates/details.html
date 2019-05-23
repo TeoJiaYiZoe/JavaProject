@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Leave Details</title>
+</head>
+<body>	
+	<div align="center">
+	<h1>Leave Details</h1>
+
+	<br><br>
+	<table border="1" cellpadding="10">
+		<thead>
+			<tr>
+				<th>StartDate</th>
+				<th>EndDate</th>
+				<th>LeaveType</th>
+				<th>Status</th>
+				<th></th>
+			</tr>		
+		</thead>
+		<tbody>
+			<tr th:each="leave : ${leaveDetails}">
+			<td th:text="${leave.startDate}">StartDate</td>
+			<td th:text="${leave.endDate}">EndDate</td>
+			<td th:text="${leave.leavetype.typeName}">LeaveType</td>
+			<td th:text="${leave.status}">Status</td>	
+			<td>
+				<span th:if="${leave.status == 'APPLIED'}">
+				<a th:href="@{'/leave/edit/' + ${leave.id}}">Edit</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a th:href="@{'/leave/delete/' + ${leave.id}}">Delete</a>
+				</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span th:if="${leave.status == 'APPROVED'}">
+				<a th:href="@{'/leave/cancel/' + ${leave.id}}">Cancel</a>
+				</span>
+			</td>	
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>
