@@ -58,7 +58,7 @@ public class leaveApplicationController {
 	}
 
 	@RequestMapping(path = "leave_applications", method = RequestMethod.POST)
-	public String saveApplication(@ModelAttribute("leave_application") leaveApplication leave_application,
+	public String saveApplication(leaveApplication leave_application,
 			@ModelAttribute("user") Staff staff) {
 		leave_application.setStaff(staff);
 		leaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(staff, leave_application.getLeavetype());
