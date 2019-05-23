@@ -14,8 +14,8 @@
 		<fieldset>
 			Leave Type: 
 			<select th:field="*{leavetype}">
-				<option th:each="leaveType:${leave_types}" th:value="${leaveType.getTypeId()}"
-					th:text="${leaveType.typeName }" th:selected="${leavetypeId eq leaveType.getTypeId()}"></option>
+				<option th:each="leaveType:${leave_types}" th:value="${leaveType.typeId}"
+					th:text="${leaveType.typeName }" th:selected="${leavetype eq leaveType}"></option>
 			</select>
 		</fieldset>
 		<fieldset>
@@ -33,6 +33,9 @@
 		<fieldset>
 			Contact Details:<input type="text" th:field="*{contact}">
 		</fieldset>
+		<!-- <fieldset>
+			<input type="hidden" th:field="*{staffId}">
+		</fieldset> -->
 		<fieldset>
 			<input type="submit" name="Save" />
 		</fieldset>

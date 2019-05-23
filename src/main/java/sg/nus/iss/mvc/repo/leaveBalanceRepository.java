@@ -1,5 +1,7 @@
 package sg.nus.iss.mvc.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +18,8 @@ import sg.nus.iss.mvc.model.leaveType;
 public interface leaveBalanceRepository extends JpaRepository<leaveBalance,leaveBalanceKey>{
 
 	leaveBalance findByStaffAndLeavetype(Staff staff, leaveType lt);
-
+	List<leaveBalance> findByStaff(Staff staff);
+	
 	@Transactional
 	@Modifying
 	@Query("update leaveBalance lb set lb.balance = :bal where lb.staff.staffId = :staffid and lb.leavetype.typeId = :leavetypeid")

@@ -92,6 +92,12 @@ public class Staff {
 	public void setLeave_application(Collection<leaveApplication> leave_application) {
 		this.leave_application = leave_application;
 	}
+
+	@Override
+	public String toString() {
+		return "Staff [staffId=" + staffId + ", staffName=" + staffName + ", designationId=" + designationId
+				+ ", password=" + password + ", leave_application=" + leave_application + ", staff=" + staff + "]";
+	}
 	
 	
 }

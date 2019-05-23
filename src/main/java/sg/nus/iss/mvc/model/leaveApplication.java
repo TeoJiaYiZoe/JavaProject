@@ -25,8 +25,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class leaveApplication {
 
 	@Id
-	@Column(name="id")
-	private int leaveId;
+	@Column(name="ID")
+	private int id;
+	//@Column(name="STAFF_ID")
+	//private int staffId;
 	@ManyToOne
 	@JoinColumn(name="staff_id")
 	private Staff staff;
@@ -42,8 +44,10 @@ public class leaveApplication {
 	private String workInstruction;
 	//private String contact;
 	private int contact;
+	//@Column(name="LEAVETYPE_ID")
+	//private int leaveTypeId;
 	@ManyToOne
-	@JoinColumn(name="leavetypeId")
+	@JoinColumn(name="LEAVETYPE_ID")
 	private leaveType leavetype;
 	private String status;
 	private String comment;
@@ -65,11 +69,12 @@ public class leaveApplication {
 		this.status = "APPLIED";
 		this.comment = comment;
 	}
-	public int getLeaveId() {
-		return leaveId;
+	
+	public int getId() {
+		return id;
 	}
-	public void setLeaveId(int leaveId) {
-		this.leaveId = leaveId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Staff getStaff() {
 		return staff;
@@ -126,4 +131,14 @@ public class leaveApplication {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	/*
+	 * public int getStaffId() { return staffId; } public void setStaffId(int
+	 * staffId) { this.staffId = staffId; }
+	 */
+	/*
+	 * public int getLeaveTypeId() { return leaveTypeId; } public void
+	 * setLeaveTypeId(int leaveTypeId) { this.leaveTypeId = leaveTypeId; }
+	 */
+	
+	
 }

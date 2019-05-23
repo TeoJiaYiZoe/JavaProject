@@ -56,6 +56,10 @@ public class leaveBalance implements Serializable{
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
+	@Override
+	public String toString() {
+		return "leaveBalance [leavetype=" + leavetype + ", staff=" + staff + ", balance=" + balance + "]";
+	}
 	
 	
 }

@@ -1,5 +1,7 @@
 package sg.nus.iss.mvc.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -31,5 +33,12 @@ public class leaveBalanceServiceImpl implements leaveBalanceService{
 	@Transactional
 	public void saveBalanceByStaffAndType(leaveType leavetype, int bal, Staff staff) {
 		leaveBalanceRepo.savebalanceByStaffAndType(leavetype.getTypeId(), bal, staff.getStaffId());
+	}
+	
+	@Override
+	@Transactional
+	public List<leaveBalance> findByStaff(Staff staff) {
+		List<leaveBalance> bal = leaveBalanceRepo.findByStaff(staff);
+		return bal;
 	}
 }
