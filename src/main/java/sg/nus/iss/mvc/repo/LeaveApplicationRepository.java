@@ -13,7 +13,7 @@ import sg.nus.iss.mvc.model.Staff;
 
 public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication,Integer>{
 
-	public List<LeaveApplication> findLeaveByStaff(Staff Staff);
+	public List<LeaveApplication> findLeaveByStaff(Staff staff);
 	
 	@Transactional
 	@Query("SELECT la FROM Staff s, LeaveApplication la WHERE s.staffId = la.staff.staffId AND s.staff = ?1 AND la.status='APPLIED'")

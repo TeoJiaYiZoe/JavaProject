@@ -29,11 +29,11 @@ public class StaffController {
 	}
 	
 	@RequestMapping(path = "staffs", method = RequestMethod.POST)
-	public String saveStaff(@Valid Staff Staff, BindingResult bindingResult) {
+	public String saveStaff(@Valid Staff staff, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "StaffForm";
 		}
-		staffRepo.save(Staff);
+		staffRepo.save(staff);
 		return "Staffs";
 	}
 }

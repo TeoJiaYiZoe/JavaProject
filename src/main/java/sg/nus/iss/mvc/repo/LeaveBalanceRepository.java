@@ -17,8 +17,8 @@ import sg.nus.iss.mvc.model.LeaveType;
 @Repository
 public interface LeaveBalanceRepository extends JpaRepository<LeaveBalance,LeaveBalanceKey>{
 
-	LeaveBalance findByStaffAndLeavetype(Staff Staff, LeaveType lt);
-	List<LeaveBalance> findByStaff(Staff Staff);
+	LeaveBalance findByStaffAndLeavetype(Staff staff, LeaveType lt);
+	List<LeaveBalance> findByStaff(Staff staff);
 	
 	@Transactional
 	@Modifying

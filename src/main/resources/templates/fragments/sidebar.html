@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+          href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
+          rel="stylesheet" media="screen" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../../static/css/style.css" />
+</head>
+<body>
+
+<div class="sidenav">
+  <a th:href="@{/leave_application/submit}">Apply Leave</a>
+  <a th:href="@{/leave}">My Leave History</a>
+  <a th:href="@{/leave/balance}">My Leave Balance</a>  
+  <span th:if="${session.User.getDesignation().getDesignationName() == 'Manager'}">
+  <a>View Leave Application for Approval</a>
+  <a>View Subordinate Leave History</a>
+  </span>
+  <span th:if="${session.User.getDesignation().getDesignationName() == 'Admin'}">
+  <a>Manage Employees</a>
+  <a>Maintain Leave types</a>
+  </span>
+</div>
+</body>
+</html>

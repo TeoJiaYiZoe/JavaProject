@@ -2,14 +2,12 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Leave Application Processing System (LAPS)</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-	<a th:href="@{/leave_application/submit}">Apply leave</a>
-	<br>
-	<a th:href="@{/leave}">My Leave History</a>
-	<br>
-	<a th:href="@{/leave/balance}">My Leave Balance</a>
-	<label th:text="${session.User.getDesignation().getDesignationName()}"></label>
+	<h1>this is me</h1>
+
 </body>
 </html>

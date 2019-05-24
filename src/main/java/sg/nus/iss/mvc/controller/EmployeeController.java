@@ -55,16 +55,16 @@ public class EmployeeController {
 
 	@RequestMapping(path = "leave_applications", method = RequestMethod.POST)
 	public String saveApplication(LeaveApplication leave_application,
-			@ModelAttribute("User") Staff Staff) {
-		leave_application.setStaff(Staff);
-		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(Staff, leave_application.getLeavetype());
+			@ModelAttribute("User") Staff staff) {
+		leave_application.setStaff(staff);
+		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(staff, leave_application.getLeavetype());
 		int balance = lb.getBalance();
 		int leavedays = holidaySer.findLeaveDaysWithoutHoliday(leave_application.getStartDate(),
 				leave_application.getEndDate());
 		if (leavedays <= balance) {
 			int bal = balance-leavedays;
 			leave_applicationRepo.save(leave_application);
-			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, Staff);
+			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
 			return "HomePage";
 		} else {
 			return "Staffs";
@@ -72,15 +72,15 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(path = "/leave/balance")
-    public String viewLeaveBalance(Model model, @ModelAttribute("User") Staff Staff) {
-		List<LeaveBalance> listBalanceLeave = leaveBalanceSer.findByStaff(Staff);
+    public String viewLeaveBalance(Model model, @ModelAttribute("User") Staff staff) {
+		List<LeaveBalance> listBalanceLeave = leaveBalanceSer.findByStaff(staff);
 		model.addAttribute("listBalanceLeave", listBalanceLeave);
-        return "LeaveBalance";
+        return "leaveBalance";
     }
 	
 	@RequestMapping(path = "/leave")
-    public String viewLeave(Model model, @ModelAttribute("User") Staff Staff) {
-		List<LeaveApplication> listLeave = leave_applicationRepo.findLeaveByStaff(Staff);
+    public String viewLeave(Model model, @ModelAttribute("User") Staff staff) {
+		List<LeaveApplication> listLeave = leave_applicationRepo.findLeaveByStaff(staff);
 		model.addAttribute("listLeave", listLeave);
         return "leave";
     }
@@ -89,7 +89,7 @@ public class EmployeeController {
     public String viewLeaveDetails(Model model, @PathVariable(value = "id") Integer id) {   	
     	LeaveApplication leave = leave_applicationRepo.findById(id).orElse(null);
     	System.out.println(leave);
-        model.addAttribute("LeaveDetails", leave);
+        model.addAttribute("leaveDetails", leave);
         return "details";
     }
 	
