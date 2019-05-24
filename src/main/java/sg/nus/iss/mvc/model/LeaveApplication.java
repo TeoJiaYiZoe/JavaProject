@@ -37,6 +37,8 @@ public class LeaveApplication {
 	@Column(name="end_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate endDate;
+	@NotEmpty
+	@Size(min=5,max=100)
 	private String reason;
 	@Column(name="work_instruction")
 	private String workInstruction;
@@ -127,14 +129,5 @@ public class LeaveApplication {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	/*
-	 * public int getStaffId() { return staffId; } public void setStaffId(int
-	 * staffId) { this.staffId = staffId; }
-	 */
-	/*
-	 * public int getLeaveTypeId() { return leaveTypeId; } public void
-	 * setLeaveTypeId(int leaveTypeId) { this.leaveTypeId = leaveTypeId; }
-	 */
-	
 	
 }
