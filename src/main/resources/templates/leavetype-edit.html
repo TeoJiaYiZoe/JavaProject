@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit LeaveType Details</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+<div align="center" class="appForm">
+	<h1>
+		Modify maximum leave for <span th:text="${leavedetail.leaveTypeName}">you chose</span> for the
+		<span th:text="${leavedetail.designationName}">you chose</span>
+	</h1>
+
+	</br>
+
+	<form th:action="@{/updateleavetype}" th:object="${leavedetail}" method=post>
+		<fieldset>
+			Leave Type: <input type="text" th:field="*{leaveTypeName}" readonly>
+			<input type="hidden" th:field="*{leaveTypeId}" readonly>
+			<input type="hidden" th:field="*{designationId}" readonly>
+		</fieldset>
+		<fieldset>
+			Designation: <input type="text" th:field="*{designationName}" readonly>
+		</fieldset>
+		<fieldset>
+			Maximum Leave: <input type="text" th:field="*{maximumLeave}">
+		</fieldset>
+		<fieldset>
+			<input type="submit" value="Submit Changes"></input>
+		</fieldset>
+	</form>
+	
+
+	
+</div>
+
+
+</body>
+</html>

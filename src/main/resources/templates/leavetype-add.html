@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Leave Type</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+<div align="center" class="appForm">
+	<h1>Add a Leave Type</h1>
+
+	</br>
+
+	<form th:action="@{/addLeaveType}" th:object="${leavetype}" method=post>
+
+		<fieldset>
+			Enter new Leave Type name: <input type="text" th:field="*{typeName}">
+		</fieldset>
+
+		<fieldset>
+			<input type="submit" value="Add Leave Type"></input>
+		</fieldset>
+	</form>
+
+</div>
+</body>
+</html>

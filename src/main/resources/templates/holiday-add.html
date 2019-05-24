@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add public holiday</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+<div align="center" class="appForm">
+	<h1>Add a public holiday</h1>
+	
+	</br>
+	
+	<form th:action="@{/addHoliday}" th:object="${holiday}" method=post>
+	<fieldset>
+		Name: <input type="text" th:field="*{name}">
+	</fieldset>
+	<fieldset>
+		Year: <input type="text" th:field="*{year}" >
+	</fieldset>
+	<fieldset>
+		Date: <input type="date" th:field="*{date}" >
+	</fieldset>
+	<fieldset>
+		<input type="submit" value="Submit Changes"></input>
+	</fieldset>
+	</form>
+	
+</div>
+</body>
+</html>

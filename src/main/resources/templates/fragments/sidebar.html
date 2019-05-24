@@ -18,8 +18,8 @@
   <a th:href="@{/leavehistory}">View Subordinates Leave History</a>
   </span>
   <span th:if="${session.User.getDesignation().getDesignationName() == 'Admin'}">
-  <a>Manage Employees</a>
-  <a>Maintain Leave types</a>
+  <a th:href="@{/admin/holiday-elfie}">Manage public holidays</a>
+  <a th:href="@{/admin/leavetype-elfie}">Manage leave types</a>
   </span>
 </div>
 </body>

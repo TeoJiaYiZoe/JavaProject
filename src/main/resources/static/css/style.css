@@ -3,6 +3,7 @@
 .appForm {
   width:700px;
   margin-left: 400px; 
+  
 }
 
 body {
@@ -61,6 +62,7 @@ body {
   background-color: #f0f0f5; /* Green */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 40px;
+
 }
 
 /* The navigation menu links */

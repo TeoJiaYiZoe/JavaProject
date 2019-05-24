@@ -8,4 +8,5 @@ import sg.nus.iss.mvc.model.LeaveType;
 public interface LeaveTypeRepository extends JpaRepository<LeaveType,Integer>{
 
 	public LeaveType findByTypeId(int id);
+	public LeaveType findTopByOrderByTypeIdDesc();
 }

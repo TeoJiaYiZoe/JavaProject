@@ -11,43 +11,43 @@ import javax.persistence.ManyToOne;
 public class LeaveDetailsId implements Serializable {
 
 
-	private LeaveType LeaveType;
+	private LeaveType leaveType;
 
-	private Designation Designation;
+	private Designation designation;
 	
 	public LeaveDetailsId() {
 		super();
 		
 	}
 
-	public LeaveDetailsId(sg.nus.iss.mvc.model.LeaveType LeaveType, Designation Designation) {
+	public LeaveDetailsId(LeaveType leaveType, Designation designation) {
 		super();
-		this.LeaveType = LeaveType;
-		this.Designation = Designation;
+		this.leaveType = leaveType;
+		this.designation = designation;
 	}
 
 	public LeaveType getLeaveType() {
-		return LeaveType;
+		return leaveType;
 	}
 
-	public void setLeaveType(LeaveType LeaveType) {
-		this.LeaveType = LeaveType;
+	public void setLeaveType(LeaveType leaveType) {
+		this.leaveType = leaveType;
 	}
 
 	public Designation getDesignation() {
-		return Designation;
+		return designation;
 	}
 
-	public void setDesignation(Designation Designation) {
-		this.Designation = Designation;
+	public void setDesignation(Designation designation) {
+		this.designation = designation;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Designation == null) ? 0 : Designation.hashCode());
-		result = prime * result + ((LeaveType == null) ? 0 : LeaveType.hashCode());
+		result = prime * result + ((designation == null) ? 0 : designation.hashCode());
+		result = prime * result + ((leaveType == null) ? 0 : leaveType.hashCode());
 		return result;
 	}
 
@@ -60,15 +60,15 @@ public class LeaveDetailsId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		LeaveDetailsId other = (LeaveDetailsId) obj;
-		if (Designation == null) {
-			if (other.Designation != null)
+		if (designation == null) {
+			if (other.designation != null)
 				return false;
-		} else if (!Designation.equals(other.Designation))
+		} else if (!designation.equals(other.designation))
 			return false;
-		if (LeaveType == null) {
-			if (other.LeaveType != null)
+		if (leaveType == null) {
+			if (other.leaveType != null)
 				return false;
-		} else if (!LeaveType.equals(other.LeaveType))
+		} else if (!leaveType.equals(other.leaveType))
 			return false;
 		return true;
 	}
