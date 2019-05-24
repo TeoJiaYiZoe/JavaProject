@@ -3,9 +3,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Edit leave</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-	<h1>Leave editing in progress</h1>
+<div align="center">
+	<h1>Edit leave details</h1>
 	<div class="container">
 		<div>
 			<form class="form-horizontal" th:object="${leaveEdit}"
@@ -74,5 +77,6 @@
 			</form>
 		</div>
 	</div>
+</div>
 </body>
 </html>

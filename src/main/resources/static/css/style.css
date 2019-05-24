@@ -1,31 +1,19 @@
 /* Add a black background color to the top navigation */
-@charset "UTF-8";
-.bg
-{
-	background:url('') repeat;
-	width:100%;
-	height:100vh;
-	background-size:100%;
-}
-.formcontainer
-{
-	postion:absolute;
-	background:#fff;
-	top: 15vh;
-	padding:30px;
-	border-radius: 10px;
-	box-shadow: 0px 0px 10px 0px #000;
-}
 
+.appForm {
+  width:700px;
+  margin-left: 400px; 
+}
 
 body {
   padding: 0px;
   margin: 0px;
+  font-family: "Arial";
 }
 
 .topnav-right {
   float: right;
-  margin-right: 190px; 
+  margin-right: 10px; 
 }
 .topnav-center {
   margin-left: 400px; 
@@ -46,7 +34,7 @@ body {
   padding: 22px 16px;
   text-decoration: none;
   font-size: 20px;
-  padding-top: 20px;
+  padding-top: 35px;
 }
 
  Change the color of links on hover 

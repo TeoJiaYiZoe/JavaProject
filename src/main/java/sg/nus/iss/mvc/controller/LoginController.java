@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import sg.nus.iss.mvc.model.LeaveApplication;
 import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.model.User;
 import sg.nus.iss.mvc.repo.StaffRepository;
@@ -34,7 +36,7 @@ public class LoginController {
 		return "loginForm";
 	}
 
-	@RequestMapping(path = "/homepage", method = RequestMethod.POST)
+	@RequestMapping(path = "homepage", method = RequestMethod.POST)
 	public String checkid(User User, Model model) {
 		Staff staff = staffRepo.findByStaffName(User.getUsername());
 		if (staff.getPassword().equalsIgnoreCase(User.getPassword())) {
@@ -44,6 +46,5 @@ public class LoginController {
 			return "loginForm";
 		}
 	}
-	
-	
+		
 }

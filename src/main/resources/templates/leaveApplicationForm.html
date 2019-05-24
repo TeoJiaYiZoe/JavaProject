@@ -3,8 +3,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
+<div align="center" class="appForm">
 	<h1>This is the form page</h1>
 	<form th:object="${leave_application}" th:action="@{/leave_applications}"
 		method="post">
@@ -40,5 +43,6 @@
 			<input type="submit" name="Save" />
 		</fieldset>
 	</form>
+</div>
 </body>
 </html>
