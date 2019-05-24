@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>List of subordinates' leave requests</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+<div align="center" class="appForm">
+<div class="container">
+    <div th:if="${not #lists.isEmpty(leave_applications)}">
+        <h2>List of subordinates' leave requests</h2>
+        <table class="table table-striped">
+            <tr>
+            	<th>Staff Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Leave Type</th>        
+                <th>Status</th>
+                <th></th>
+            </tr>
+            <tr th:each="leave_application:${leave_applications}">
+            	<td th:text="${leave_application.staff.staffName}">Staff Name</td>
+				<td th:text="${leave_application.startDate}">Start Date</td>
+				<td th:text="${leave_application.endDate}">End Date</td>
+				<td th:text="${leave_application.leavetype.typeName}">Leave Type</td>
+				<td th:text="${leave_application.status}">Status</td>
+            	<td>
+            		<a th:href="@{'/leaverequest/edit/' + ${leave_application.id}}">Edit</a>
+            </tr>
+        </table>
+         </div>
+ </div>
+</div>
+</body>
+</html>

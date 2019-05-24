@@ -1,6 +1,7 @@
 package sg.nus.iss.mvc.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -82,7 +83,7 @@ public class EmployeeController {
     }
 	
 	@RequestMapping(path = "/leave")
-    public String viewLeave(Model model, @ModelAttribute("User") Staff staff) {
+    public String viewLeave(Model model, @ModelAttribute("User") Optional<Staff> staff) {
 		List<LeaveApplication> listLeave = leave_applicationRepo.findLeaveByStaff(staff);
 		model.addAttribute("listLeave", listLeave);
         return "leave";

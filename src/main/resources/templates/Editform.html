@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Leave Application for Approval</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+<div align="center" class="appForm">
+	<form th:object="${leave_application}" th:action="@{/leaverequest/submit}" method="post">
+		<fieldset>
+			staff_id <input type="text" th:field="*{staff.staffId}" readonly="readonly">
+	
+		</fieldset>
+		<fieldset>
+			startDate <input type="text" th:field="*{startDate}" readonly="readonly">
+			
+			</fieldset>
+			<fieldset>
+			endDate <input type="text" th:field="*{endDate}" readonly="readonly">
+			
+			</fieldset>
+			<fieldset>
+			contact <input type="text" th:field="*{contact}" readonly="readonly">
+		
+			</fieldset>
+			<fieldset>
+			work Instruction<input type="text" th:field="*{workInstruction}" readonly="readonly">	
+			
+			</fieldset>
+			<fieldset>
+			reason <input type="text" th:field="*{reason}" readonly="readonly">
+			
+			</fieldset>
+		<fieldset>
+			status: <select th:field="*{status}">
+			  <option th:value="'APPLIED'" th:text="APPLIED"></option>
+			  <option th:value="'APPROVED'" th:text="APPROVED"></option>
+			  <option th:value="'REJECTED'" th:text="REJECTED"></option>
+</select>
+		</fieldset>
+			<fieldset>
+			comment: <input type="text" th:field="*{comment}">
+			<p th:if="${#fields.hasErrors('comment')}" th:errors ="*{comment}"></p>
+			</fieldset>
+			<fieldset>
+			<button type="submit">Save</button>
+		</fieldset>
+			<input type="hidden" th:field="*{leavetype.typeId}">
+			 <input type="hidden" th:field="*{id}">
+			
+
+	</form>
+	<table>
+		<tr>
+			<td>StaffID</td>
+			<td>Staff Name</td>
+			<td>Start Date</td>
+			<td>End Date</td>
+			<td>Reason</td>
+			<td>Status</td>
+			<td></td>
+		</tr>
+		<tr th:each="leaveapp: ${leavefor5}">
+		<td th:text="${leaveapp.staff.staffId}">StaffID</td>
+			<td th:text="${leaveapp.staff.staffName}">StaffName</td>
+			<td th:text="${leaveapp.startDate}">StartDate</td>
+			<td th:text="${leaveapp.endDate}">EndDate</td>
+			<td th:text="${leaveapp.reason}">Reason</td>
+			<td th:text="${leaveapp.status}">status</td>
+			<td></td>
+		</tr>		
+	</table>
+</div>
+</body>
+</html>

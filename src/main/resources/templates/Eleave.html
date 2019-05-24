@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+<div align="center">
+	<h1>My Leave History</h1>
+
+	<br><br>
+	<table border="1" cellpadding="10">
+		<thead>
+			<tr>
+				<th>StartDate</th>
+				<th>EndDate</th>
+				<th>LeaveType</th>
+				<th>Status</th>
+				<th></th>
+			</tr>		
+		</thead>
+		<tbody>
+			<tr th:each="leaveHistory : ${leaveHistory}">
+			<td th:text="${leaveHistory.startDate}">StartDate</td>
+			<td th:text="${leaveHistory.endDate}">EndDate</td>
+			<td th:text="${leaveHistory.leavetype.typeName}">LeaveType</td>
+			<td th:text="${leaveHistory.status}">Status</td>	
+			<td>
+				<a th:href="@{'/leave/viewDetails/' + ${leaveHistory.id}}">View Details</a>
+			</td>	
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

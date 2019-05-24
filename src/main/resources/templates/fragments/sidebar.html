@@ -14,8 +14,8 @@
   <a th:href="@{/leave}">My Leave History</a>
   <a th:href="@{/leave/balance}">My Leave Balance</a>  
   <span th:if="${session.User.getDesignation().getDesignationName() == 'Manager'}">
-  <a>View Leave Application for Approval</a>
-  <a>View Subordinate Leave History</a>
+  <a th:href="@{/leaverequest}">View Leave Application for Approval</a>
+  <a th:href="@{/leavehistory}">View Subordinates Leave History</a>
   </span>
   <span th:if="${session.User.getDesignation().getDesignationName() == 'Admin'}">
   <a>Manage Employees</a>
