@@ -38,9 +38,13 @@ public class ManagerController {
 	}
 	
 	 @RequestMapping(path = "/leaverequest/submit", method = RequestMethod.POST)
-	    public String save(@ModelAttribute("leave_application") @Valid LeaveApplication leave_application, BindingResult bindingResult) {
+	    public String save(Model model, @ModelAttribute("leave_application") @Valid LeaveApplication leave_application, BindingResult bindingResult,@ModelAttribute("User") Staff staff) {
 	    	if (bindingResult.hasErrors()) {
-	    		System.out.println(bindingResult.getFieldError("comment"));
+	    		LocalDate startdate = leave_application.getStartDate(); 
+				LocalDate enddate =   leave_application.getEndDate();
+				List<LeaveApplication> leavelist = leave_applicationRepo.checkOverlapLeave(startdate, enddate,staff.getStaffId());
+				model.addAttribute("leavefor5", leavelist);
+	    		//System.out.println(bindingResult.getFieldError("comment"));
 	            return "Editform";
 	        }
 	    	
