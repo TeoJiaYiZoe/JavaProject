@@ -2,12 +2,10 @@ package sg.nus.iss.mvc.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="leave_type")
@@ -17,6 +15,8 @@ public class LeaveType {
 	@Column(name="id")
 	private int typeId;
 	@Column(name="name")
+	@NotNull
+	@Size(min=3, max=15, message="Leave Type name must be between {min} and {max} characters long.")
 	private String typeName;
 	public LeaveType() {
 		super();

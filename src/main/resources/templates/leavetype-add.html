@@ -16,6 +16,7 @@
 
 		<fieldset>
 			Enter new Leave Type name: <input type="text" th:field="*{typeName}">
+			<span th:if="${#fields.hasErrors('typeName')}" th:errors="*{typeName}">Name Error</span>
 		</fieldset>
 
 		<fieldset>

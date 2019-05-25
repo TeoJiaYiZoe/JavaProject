@@ -6,8 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,11 +18,14 @@ public class Holiday {
 	@Id
 	@Column(name="id")
 	private int id;
+	@NotNull
+	@Size(min=6, max=50, message="Holiday name must be between {min} and {max} characters long.")
 	@Column(name="name")
 	private String name;
 	@Column(name="year")
 	private int year;
 	@Column(name="date")
+	@Future
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	

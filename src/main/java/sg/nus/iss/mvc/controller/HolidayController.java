@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,7 @@ public class HolidayController {
 	}
 	
 	
-	@RequestMapping(path = "/admin/holiday-elfie", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/holiday-main", method = RequestMethod.GET)
 	public String displayHolidayMainpage(Model model) {
 		
 		List<Holiday> holidayList = holidayRepo.findAll();
@@ -34,7 +36,7 @@ public class HolidayController {
 		model.addAttribute("holidayList", holidayList);
 		model.addAttribute("currentYear", currentYear);
 		
-		return "holiday-elfie";
+		return "holiday-main";
 		
 	}
 	
@@ -46,10 +48,14 @@ public class HolidayController {
 	}
 	 
 	@RequestMapping(path = "/updateholiday", method = RequestMethod.POST)
-	public String updateHoliday( Holiday currentHoliday) {
+	public String updateHoliday(@ModelAttribute("currentHoliday") @Valid Holiday currentHoliday, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+
+			return "holiday-edit";
+		}
+		currentHoliday.setYear(currentHoliday.getDate().getYear());
 		holidayRepo.save(currentHoliday);
-		return "redirect:/admin/holiday-elfie";
-		
+		return "redirect:/admin/holiday-main";
 	}
 	
 	@RequestMapping(path = "/admin/holiday/add", method = RequestMethod.GET)
@@ -60,14 +66,18 @@ public class HolidayController {
 	}
 	
 	@RequestMapping(path = "/addHoliday", method = RequestMethod.POST)
-	public String createHoliday(@Valid Holiday holiday) {
+	public String createHoliday(@Valid Holiday holiday, BindingResult bindingResult) {
+		 if (bindingResult.hasErrors()) {
+	            return "holiday-add";
+	        }
+		holiday.setYear(holiday.getDate().getYear());
 		holidayRepo.save(holiday);
-		return "redirect:/admin/holiday-elfie";
+		return "redirect:/admin/holiday-main";
 	}
 	
 	@RequestMapping(path = "/admin/holiday/delete/{id}", method = RequestMethod.GET)
 	public String deleteHoliday(@PathVariable("id") Integer id) {
 		holidayRepo.deleteById(id);
-		return "redirect:/admin/holiday-elfie";
+		return "redirect:/admin/holiday-main";
 	}
 }

@@ -30,4 +30,9 @@ public interface LeaveDetailsRepository extends JpaRepository<LeaveDetails, Leav
 	@Query(value = "INSERT INTO designation_leave VALUES (:designationid, :leavetypeid, 0 )",
 	nativeQuery = true)
 	public void addNewLeaveType( @Param("designationid") int designationid, @Param("leavetypeid") int leavetypeid);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "DELETE FROM LeaveDetails ld where ld.leaveType.typeId = :leavetypeid")
+	void deleteDetailsForDeletedLeaveType(@Param("leavetypeid") int leavetypeid);
 }

@@ -9,7 +9,7 @@
 <body>
 <div align="center" class="appForm">
 	<h1>
-		Edit page for holiday <span th:text="${currentHoliday.name}">you
+		Edit page for holiday:&nbsp; <span th:text="${currentHoliday.name}">you
 			chose</span>
 	</h1>
 
@@ -21,14 +21,13 @@
 
 		<fieldset>
 			Name: <input type="text" th:field="*{name}">
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+			<input type="hidden" th:field="*{year}">
 		</fieldset>
-		<fieldset>
-			Year: <input type="text" th:field="*{year}">
-		</fieldset>
+		
 		<fieldset>
 			Date: <input type="date" th:field="*{date}">
-		</fieldset>
-		<fieldset>
+			<span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Name Error</span>
 			<input type="hidden" th:field="*{id}">
 		</fieldset>
 		<fieldset>

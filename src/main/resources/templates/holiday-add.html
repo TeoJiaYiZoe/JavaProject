@@ -15,12 +15,12 @@
 	<form th:action="@{/addHoliday}" th:object="${holiday}" method=post>
 	<fieldset>
 		Name: <input type="text" th:field="*{name}">
-	</fieldset>
-	<fieldset>
-		Year: <input type="text" th:field="*{year}" >
+		<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+		<input type="hidden" th:field="*{year}" >
 	</fieldset>
 	<fieldset>
 		Date: <input type="date" th:field="*{date}" >
+		<span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Name Error</span>
 	</fieldset>
 	<fieldset>
 		<input type="submit" value="Submit Changes"></input>
