@@ -47,7 +47,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Reason:</td>
+				<td>Comment:</td>
 				<td><textarea rows="4" cols="50" th:field="*{comment}"></textarea></td>
 				<td th:if="${#fields.hasErrors('comment')}"
 					th:errors="*{comment}" style="color: red"></td>
@@ -63,10 +63,8 @@
 		</table>
 			<a><input type="submit" value="Save" class="bclass" /></a>
 	</form>
-	
-	<br>
-	<br>
-	<br><br><br>
+
+	<br><br>
 	<div th:if="${#lists.isEmpty(leavefor5)}">
 	<h1>No list of leave records of subordinates during designated leave period</h1>
 	</div>

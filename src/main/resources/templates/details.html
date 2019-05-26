@@ -50,13 +50,13 @@
 	<br>
 	<br>
 				<span th:if="${leave.status == 'APPLIED'}">
-				<a class="clicker" th:href="@{'/leave/edit/' + ${leave.id}}">Edit</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a class="clicker" th:href="@{'/leave/delete/' + ${leave.id}}">Delete</a>
+				<a class="bclass" th:href="@{'/leave/edit/' + ${leave.id}}">Edit</a>
+				
+				<a class="bclass" th:href="@{'/leave/delete/' + ${leave.id}}">Delete</a>
 				</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				<span th:if="${leave.status == 'APPROVED'}">
-				<a class="clicker" th:href="@{'/leave/cancel/' + ${leave.id}}">Cancel</a>
+				<a class="bclass" th:href="@{'/leave/cancel/' + ${leave.id}}">Cancel</a>
 				</span>				
 	</div>
 </div>

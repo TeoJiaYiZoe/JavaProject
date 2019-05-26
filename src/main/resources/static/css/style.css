@@ -57,39 +57,13 @@ h2 {
 	padding: 20px;
 }
 
-.clicker {
-	font-weight: 600;
-	font-size: 18px;
-	color: #669;
-}
 
-/* button {
-	border : thin;
-	border-style : none none none none;
-	background : transparent;
-	margin : 0px 0px 0px 0px;
-	padding : 0px 0px 0px 0px;
-	white-space : normal;
-	width : auto;
 
-}
-.bclass {
-    background-color: #006080; 
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: auto;
-  	position: absolute;
-  	margin-top: 10px;
-  	margin-bottom: 20px;    
-} */
 .bclass{
-  position: absolute;
+  position:;
   margin-top: 15px;
+  margin-right: 20px;
+  margin-left: 20px;
   text-decoration: none;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -108,6 +82,7 @@ h2 {
   background-color: #b3b3cc;
   color: white;
 }
+
 
 .topnav-right {
   float: right;
@@ -152,13 +127,14 @@ h2 {
   height: 100%;  
   /* Full-height: remove this if you want "auto" height */
   width: 190px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed sidebar (stay in place on scroll) */
+  position: absolute; /* Fixed sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 100px; /* Stay at the top */
   left: 0;
   background-color: #f0f0f5;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 40px;
+  overflow: auto;
 
 }
 

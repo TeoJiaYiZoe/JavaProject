@@ -49,7 +49,7 @@ public class EmployeeController {
 		this.leaveBalanceSer = leaveBalanceSer;
 	}
 
-	@RequestMapping(path = "leave_application/submit", method = RequestMethod.GET)
+	@RequestMapping(path = "/leave/apply", method = RequestMethod.GET)
 	public String createLeaveApplication(Model model) {
 		model.addAttribute("leave_application", new LeaveApplication());
 		List<LeaveType> leave_types = leave_typeRepo.findAll();
@@ -57,9 +57,16 @@ public class EmployeeController {
 		return "leaveApplicationForm";
 	}
 
-	@RequestMapping(path = "leave_applications", method = RequestMethod.POST)
-	public String saveApplication(LeaveApplication leave_application,
+	@RequestMapping(path = "/leaveApplication/submit", method = RequestMethod.POST)
+	public String saveApplication(Model model, @ModelAttribute("leave_application") @Valid LeaveApplication leave_application, BindingResult bindingResult,
 			@ModelAttribute("User") Staff staff) {
+		if (bindingResult.hasErrors()) {
+			
+			List<LeaveType> leave_types = leave_typeRepo.findAll();
+			model.addAttribute("leave_types", leave_types);
+			
+    		return "leaveApplicationForm";
+    	}
 		leave_application.setStaff(staff);
 		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(staff, leave_application.getLeavetype());
 		int balance = lb.getBalance();
@@ -69,7 +76,7 @@ public class EmployeeController {
 			int bal = balance-leavedays;
 			leave_applicationRepo.save(leave_application);
 			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
-			return "HomePage";
+			return "redirect:/leave";
 		} else {
 			return "insufficientLeaveBalanceErrorPage";
 		}

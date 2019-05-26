@@ -28,21 +28,22 @@
 				</tr>
 			</thead>
 			<tbody>
-			<tr th:each=" leavedetail : ${ldlist}">
-				<td th:text="${leavedetail.designation.designationName}">designation
-					name</td>
-				<td></td>
-				<td th:text="${leavedetail.leaveType.typeName}">leave type</td>
-				<td></td>
-				<td th:text="${leavedetail.maximumLeave}">maxleave</td>
-				<td></td>
-				<td><a
-					th:href="${'/admin/leavetype/edit/' + leavedetail.leaveType.typeId + '/' + leavedetail.designation.id }">Edit</a></td>
-				<td></td>
-			</tr>
+				<tr th:each=" leavedetail : ${ldlist}">
+					<td th:text="${leavedetail.designation.designationName}">designation
+						name</td>
+					<td></td>
+					<td th:text="${leavedetail.leaveType.typeName}">leave type</td>
+					<td></td>
+					<td th:text="${leavedetail.maximumLeave}">maxleave</td>
+					<td></td>
+					<td><a
+						th:href="${'/admin/leavetype/edit/' + leavedetail.leaveType.typeId + '/' + leavedetail.designation.id }">Edit</a>
+					</td>
+					<td></td>
+				</tr>
 			</tbody>
 		</table>
 
-</div>
+	</div>
 </body>
 </html>
