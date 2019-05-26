@@ -3,34 +3,65 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Edit leave details</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-	<h1>Edit leave details</h1>
-			<form th:object="${leaveEdit}" th:action="@{/leave}" method="post">
-			 
-			<fieldset> StartDate: <input type="text" th:field="*{startDate}">
-				<p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></p> 
-			</fieldset> 
-			<fieldset> EndDate: <input type="text" th:field="*{endDate}">
-			<p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></p> 
-			</fieldset> 
-			<fieldset><input type="hidden" th:field="*{status}" >
-			</fieldset> 
-			<fieldset> Reason: <input type="text" th:field="*{reason}"> 
-			<p th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}"></p> 
-			</fieldset>
-			<fieldset> Work Instruction: <input type="text" th:field="*{workInstruction}"> 
-			<p th:if="${#fields.hasErrors('workInstruction')}" th:errors="*{workInstruction}"></p> 
-			</fieldset>
-			<fieldset> Contact: <input type="text" th:field="*{contact}"> 
-			<p th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}"></p> 
-			</fieldset> 
-			<fieldset> <button type="submit">Save</button> </fieldset>
-			<input type="hidden" th:field="*{leavetype.typeId}">
-			<input type="hidden" th:field="*{id}">
-			<input type="hidden" th:field="*{comment}" >
-			<input type="hidden" th:field="*{staff.staffId}" >
-			
-			</form>
+	<div align="center">
+		<h1>Edit leave details</h1>
+		<form th:object="${leaveEdit}" th:action="@{/leave/save}" method="post">
+			<table>
+			<tbody>
+				<tr>
+					<td>Start Date:</td>
+					<td><input type="date" th:field="*{startDate}" /></td>
+					<td th:if="${#fields.hasErrors('startDate')}"
+						th:errors="*{startDate}"></td>
+				</tr> 
+				<tr>
+					<td>End Date:</td>
+					<td><input type="date" th:field="*{endDate}" /></td>
+					<td th:if="${#fields.hasErrors('endDate')}"
+						th:errors="*{endDate}"></td>
+				</tr> 
+				<tr>
+					<td>Reason:</td>
+					<td><textarea rows="4" cols="50" th:field="*{reason}"></textarea></td>
+					<td th:if="${#fields.hasErrors('reason')}"
+						th:errors="*{reason}" style="color: red"></td>
+				</tr> 
+				<tr>
+					<td>Work Instruction:</td>
+					<td><textarea rows="4" cols="50" th:field="*{workInstruction}"></textarea></td>
+					<td th:if="${#fields.hasErrors('workInstruction')}"
+						th:errors="*{workInstruction}"></td>
+				</tr>
+				<tr>
+					<td>Contact:</td>
+					<td><input type="text" th:field="*{contact}" /></td>
+					<td th:if="${#fields.hasErrors('contact')}"
+						th:errors="*{contact}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{comment}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{id}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{status}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{leavetype.typeId}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{staff.staffId}"></td>
+				</tr>
+ 
+			</tbody>
+			</table>
+			<a><input type="submit" value="Save" class="bclass" /></a>
+		</form>
+	</div>
 </body>
 </html>

@@ -7,25 +7,26 @@
 <th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-<div align="center" class="appForm">
+<div align="center">
 	<h1>Choose a Leave Type to delete</h1>
 
-	</br>
-
 	<table>
-		<tr>
-			<td>Leave Type</td>
-			<td></td>
+		<thead>
+			<tr>
+				<th>Leave Type</th>
+				<th></th>
 
-		</tr>
-		<tr th:each="leavetype : ${ltlist}">
-			<td th:text="${leavetype.typeName}">leave type name</td>
-			<td></td>
-			<td><a
-				th:href="${'/admin/leavetype/delete/' + leavetype.typeId}">Delete</a></td>
-			<td></td>
-
-		</tr>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="leavetype : ${ltlist}">
+				<td th:text="${leavetype.typeName}">leave type name</td>
+				<td></td>
+				<td><a
+					th:href="${'/admin/leavetype/delete/' + leavetype.typeId}">Delete</a></td>
+				<td></td>
+			</tr>
+		</tbody>
 	</table>
 </div>
 </body>

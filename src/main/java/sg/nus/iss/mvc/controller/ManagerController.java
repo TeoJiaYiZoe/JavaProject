@@ -37,7 +37,7 @@ public class ManagerController {
 		this.staff_typeRepo = staff_typeRepo;
 	}
 	
-	 @RequestMapping(path = "/leaverequest/submit", method = RequestMethod.POST)
+	 @RequestMapping(path = "manager/leaverequest/submit", method = RequestMethod.POST)
 	    public String save(Model model, @ModelAttribute("leave_application") @Valid LeaveApplication leave_application, BindingResult bindingResult,@ModelAttribute("User") Staff staff) {
 	    	if (bindingResult.hasErrors()) {
 	    		LocalDate startdate = leave_application.getStartDate(); 
@@ -45,19 +45,19 @@ public class ManagerController {
 				List<LeaveApplication> leavelist = leave_applicationRepo.checkOverlapLeave(startdate, enddate,staff.getStaffId());
 				model.addAttribute("leavefor5", leavelist);
 	    		//System.out.println(bindingResult.getFieldError("comment"));
-	            return "Editform";
+	            return "leaveRequest-edit";
 	        }
 	    	
 	    	leave_applicationRepo.save(leave_application);
-	        return "redirect:/leaverequest";
+	        return "redirect:/manager/leaverequest";
 	    }
-	    @RequestMapping(path = "/leaverequest", method = RequestMethod.GET)
+	    @RequestMapping(path = "manager/leaverequest", method = RequestMethod.GET)
 	    public String getAll(Model model,@ModelAttribute("User") Staff staff) {
 	    	List<LeaveApplication> listb = leave_applicationRepo.findSubordinateByBossId(staff.getStaffId());
 	        model.addAttribute("leave_applications", listb);
-	        return "Request";
+	        return "leaveRequest-list";
 	    } 
-	    @RequestMapping(path = "/leaverequest/edit/{id}", method = RequestMethod.GET)
+	    @RequestMapping(path = "manager/leaverequest/edit/{id}", method = RequestMethod.GET)
 	    public String edit(Model model, @PathVariable(value = "id") Integer id,@ModelAttribute("User") Staff staff) {   	
 	    	LeaveApplication leave_application= leave_applicationRepo.findByid(id);
 	        model.addAttribute("leave_application", leave_application);
@@ -66,20 +66,27 @@ public class ManagerController {
 			List<LeaveApplication> leavelist = leave_applicationRepo.checkOverlapLeave(startdate, enddate,staff.getStaffId());
 			model.addAttribute("leavefor5", leavelist);
 	
-	        return "Editform";
+	        return "leaveRequest-edit";
 	    }
-	    @RequestMapping(path = "/leavehistory", method = RequestMethod.GET)
+	    @RequestMapping(path = "/manager/leavehistory", method = RequestMethod.GET)
 	    public String getHistoryOfEmployee(Model model,@ModelAttribute("User") Staff staff) {
 	    	List<Staff> s =staff_typeRepo.findHistoryByid(staff.getStaffId());
 	    	model.addAttribute("listOfSubordinates", s);   //rename
-	        return "EmployeeHistory";
+	        return "subordinatesLeaveHistory";
 	    } 
-	    @RequestMapping(path = "/leavehistory/view/{id}", method = RequestMethod.GET)
+	    @RequestMapping(path = "/manager/leavehistory/view/{id}", method = RequestMethod.GET)
 	    public String viewleavehistory(Model model, @PathVariable(value = "id") Integer id) {
 	    	Optional<Staff> s = staff_typeRepo.findById(id); 
 	        List<LeaveApplication> leaveHistory = leave_applicationRepo.findLeaveByStaff(s);
 	        model.addAttribute("leaveHistory", leaveHistory);
 
-	        return "Eleave";
+	        return "subordinateLeave-list";
+	    }
+	    @RequestMapping(path = "/manager/subordinatesLeave/viewDetails/{id}", method = RequestMethod.GET)
+	    public String viewLeaveDetails(Model model, @PathVariable(value = "id") Integer id) {   	
+	    	LeaveApplication leaveDetails = leave_applicationRepo.findById(id).orElse(null);
+	    	System.out.println(leaveDetails);
+	        model.addAttribute("leaveDetails_subordinate", leaveDetails);
+	        return "subordinateLeaveDetails";
 	    }
 }

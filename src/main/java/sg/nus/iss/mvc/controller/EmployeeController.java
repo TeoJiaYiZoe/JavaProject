@@ -71,7 +71,7 @@ public class EmployeeController {
 			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
 			return "HomePage";
 		} else {
-			return "Staffs";
+			return "insufficientLeaveBalanceErrorPage";
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class EmployeeController {
         return "edit";
     }
     
-    @RequestMapping(path = "/leave", method = RequestMethod.POST)
+    @RequestMapping(path = "/leave/save", method = RequestMethod.POST)
     public String saveLeaveDetails(@ModelAttribute("leaveEdit") @Valid LeaveApplication leaveAppl, BindingResult bindingResult) {
     	if (bindingResult.hasErrors()) {
     		return "edit";

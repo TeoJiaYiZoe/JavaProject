@@ -9,36 +9,54 @@
 <body>	
 	<div align="center">
 	<h1>Leave Details</h1>
-
-	<br><br>
 	<div th:each="leave : ${leaveDetails}">
-	<table border="1" cellpadding="10">
-		<thead>
-			<tr>
-				<th>StartDate</th>
-				<th>EndDate</th>
-				<th>LeaveType</th>
-				<th>Status</th>
-			</tr>		
-		</thead>
+	<table>
 		<tbody>
 			<tr>
-			<td th:text="${leave.startDate}">StartDate</td>
-			<td th:text="${leave.endDate}">EndDate</td>
-			<td th:text="${leave.leavetype.typeName}">LeaveType</td>
-			<td th:text="${leave.status}">Status</td>	
+			<td>LeaveType:</td>
+			<td th:text="${leave.leavetype.typeName}"></td>
+			</tr>
+			<tr>
+			<td>StartDate:</td>
+			<td th:text="${leave.startDate}"></td>	
+			</tr>
+			<tr>
+			<td>EndDate:</td>
+			<td th:text="${leave.endDate}"></td>	
+			</tr>
+			<tr>
+			<td>Status:</td>
+			<td th:text="${leave.status}"></td>	
+			</tr>
+			<tr>
+			<td>Reason:</td>
+			<td th:text="${leave.reason}"></td>	
+			</tr>
+			<tr>
+			<td>Work Instruction:</td>
+			<td th:text="${leave.workInstruction}"></td>	
+			</tr>
+			<tr>
+			<td>Contact:</td>
+			<td th:text="${leave.contact}"></td>	
+			</tr>
+			<tr>
+			<td>Comment:</td>
+			<td th:text="${leave.comment}"></td>	
 			</tr>
 		</tbody>
 	</table>
 	<br>
+	<br>
+	<br>
 				<span th:if="${leave.status == 'APPLIED'}">
-				<a th:href="@{'/leave/edit/' + ${leave.id}}"><button>Edit</button></a>
+				<a class="clicker" th:href="@{'/leave/edit/' + ${leave.id}}">Edit</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a th:href="@{'/leave/delete/' + ${leave.id}}"><button>Delete</button></a>
+				<a class="clicker" th:href="@{'/leave/delete/' + ${leave.id}}">Delete</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<span th:if="${leave.status == 'APPROVED'}">
-				<a th:href="@{'/leave/cancel/' + ${leave.id}}"><button>Cancel</button></a>
+				<a class="clicker" th:href="@{'/leave/cancel/' + ${leave.id}}">Cancel</a>
 				</span>				
 	</div>
 </div>

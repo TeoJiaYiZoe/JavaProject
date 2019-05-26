@@ -7,24 +7,27 @@
 <th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-	<div align="center" class="appForm">
-		<h1>Manage Leave Types</h1>
-		</br> <a th:href="@{/admin/leavetype/add}">Add a new Leave Type</a> <a
-			th:href="@{/admin/leavetype/delete}">Remove a Leave Type</a> </br>
+<div align="center">
+	<h1>Manage Leave Types</h1>
+		<a th:href="@{/admin/leavetype/add}" class="bclass">Add a new Leave Type</a> <a
+			th:href="@{/admin/leavetype/delete}" class="bclass">Remove a Leave Type</a> 
+		<br><br>
 
 		<h2>List of leave details</h2>
-		</br>
-
 		<table>
-			<tr>
-				<td>Staff Designation</td>
-				<td></td>
-				<td>Leave Type</td>
-				<td></td>
-				<td>Maximum Leave</td>
-				<td></td>
-			</tr>
-			<tr></tr>
+			<thead>
+				<tr>
+					<th>Staff Designation</th>
+					<th></th>
+					<th>Leave Type</th>
+					<th></th>
+					<th>Maximum Leave</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
 			<tr th:each=" leavedetail : ${ldlist}">
 				<td th:text="${leavedetail.designation.designationName}">designation
 					name</td>
@@ -36,10 +39,10 @@
 				<td><a
 					th:href="${'/admin/leavetype/edit/' + leavedetail.leaveType.typeId + '/' + leavedetail.designation.id }">Edit</a></td>
 				<td></td>
-
 			</tr>
+			</tbody>
 		</table>
 
-	</div>
+</div>
 </body>
 </html>

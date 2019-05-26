@@ -2,47 +2,69 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Leave Application Form</title>
 <th:block th:replace="fragments/header"></th:block>
 <th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-<div align="center" class="appForm">
-	<h1>This is the form page</h1>
+<div align="center">
+	<h1>Leave Application Form</h1>
 	<form th:object="${leave_application}" th:action="@{/leave_applications}"
 		method="post">
-		<fieldset>
-			Staff Name:<label th:text="${session.User.getStaffName()}"></label>
-		</fieldset>
-		<fieldset>
-			Leave Type: 
-			<select th:field="*{leavetype}">
-				<option th:each="leaveType:${leave_types}" th:value="${leaveType.typeId}"
-					th:text="${leaveType.typeName }" th:selected="${leavetype eq leaveType}"></option>
-			</select>
-		</fieldset>
-		<fieldset>
-			Start Date:<input type="date" th:field="*{startDate}">
-		</fieldset>
-		<fieldset>
-			End Date:<input type="date" th:field="*{endDate}">
-		</fieldset>
-		<fieldset>
-			Reason:<input type="text" th:field="*{reason}">
-		</fieldset>
-		<fieldset>
-			Work Instruction:<input type="text" th:field="*{workInstruction}">
-		</fieldset>
-		<fieldset>
-			Contact Details:<input type="text" th:field="*{contact}">
-		</fieldset>
-		<!-- <fieldset>
-			<input type="hidden" th:field="*{staffId}">
-		</fieldset> -->
-		<fieldset>
-			<input type="submit" name="Save" />
-		</fieldset>
+		<table>
+			<tbody>
+				<tr>
+					<td>Staff Name:</td> 
+					<td><span th:text="${session.User.getStaffName()}"></span></td>
+				</tr>
+				<tr>
+					<td>Leave Type:</td>
+					<td>
+						<select th:field="*{leavetype}">
+							<option th:each="leaveType:${leave_types}" th:value="${leaveType.typeId}"
+						    th:text="${leaveType.typeName }" th:selected="${leavetype eq leaveType}">
+							</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Start Date:</td>
+					<td><input type="date" th:field="*{startDate}" /></td>
+					<td th:if="${#fields.hasErrors('startDate')}"
+						th:errors="*{startDate}"></td>
+				</tr>
+				<tr>
+					<td>End Date:</td>
+					<td><input type="date" th:field="*{endDate}" /></td>
+					<td th:if="${#fields.hasErrors('endDate')}"
+						th:errors="*{endDate}"></td>
+				</tr>
+				<tr>
+					<td>Reason:</td>
+					<td><textarea rows="4" cols="50" th:field="*{reason}"></textarea></td>
+					<td th:if="${#fields.hasErrors('reason')}"
+						th:errors="*{reason}"></td>
+				</tr>
+				<tr>
+					<td>Work Instruction:</td>
+					<td><textarea rows="4" cols="50" th:field="*{workInstruction}"></textarea></td>
+					<td th:if="${#fields.hasErrors('workInstruction')}"
+						th:errors="*{workInstruction}"></td>
+				</tr>
+				<tr>
+					<td>Contact:</td>
+					<td><input type="text" th:field="*{contact}" /></td>
+					<td th:if="${#fields.hasErrors('contact')}"
+						th:errors="*{contact}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{comment}"></td>
+				</tr>
+
+			</tbody>
+		</table>
+				<a><input type="submit" value="Apply" class="bclass" /></a>
 	</form>
-</div>
+	</div>
 </body>
 </html>

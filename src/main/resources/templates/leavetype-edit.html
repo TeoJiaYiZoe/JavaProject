@@ -7,35 +7,38 @@
 <th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-<div align="center" class="appForm">
+<div align="center">
 	<h1>
 		Modify maximum leave for <span th:text="${leavedetail.leaveTypeName}">you chose</span> for the
 		<span th:text="${leavedetail.designationName}">you chose</span>
 	</h1>
 
-	</br>
-
 	<form th:action="@{/updateleavetype}" th:object="${leavedetail}" method=post>
-		<fieldset>
-			Leave Type: <input type="text" th:field="*{leaveTypeName}" readonly>
-			<input type="hidden" th:field="*{leaveTypeId}" readonly>
-			<input type="hidden" th:field="*{designationId}" readonly>
-		</fieldset>
-		<fieldset>
-			Designation: <input type="text" th:field="*{designationName}" readonly>
-		</fieldset>
-		<fieldset>
-			Maximum Leave: <input type="text" th:field="*{maximumLeave}">
-		</fieldset>
-		<fieldset>
-			<input type="submit" value="Submit Changes"></input>
-		</fieldset>
+		<table>
+			<tbody>
+				<tr>
+					<td>Leave Type:</td>
+					<td><input type="text" th:field="*{leaveTypeName}" readonly/></td>
+				</tr>
+				<tr>
+					<td>Designation:</td>
+					<td><input type="text" th:field="*{designationName}" readonly/></td>
+				</tr>
+				<tr>
+					<td>Maximum Leave:</td>
+					<td><input type="text" th:field="*{maximumLeave}" /></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{leaveTypeId}"></td>
+				</tr> 
+				<tr>
+					<td><input type="hidden" th:field="*{designationId}"></td>
+				</tr> 
+			</tbody>
+		</table>
+		<a><input type="submit" value="Submit Changes" class="bclass" /></a>
 	</form>
-	
-
-	
+		
 </div>
-
-
 </body>
 </html>

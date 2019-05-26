@@ -7,34 +7,38 @@
 <th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-<div align="center" class="appForm">
+<div align="center">
 	<h1>
 		Edit page for holiday:&nbsp; <span th:text="${currentHoliday.name}">you
 			chose</span>
 	</h1>
-
-	</br>
-
-	
+		
 	<form th:action="@{/updateholiday}" th:object="${currentHoliday}"
 		method=post>
-
-		<fieldset>
-			Name: <input type="text" th:field="*{name}">
-			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
-			<input type="hidden" th:field="*{year}">
-		</fieldset>
-		
-		<fieldset>
-			Date: <input type="date" th:field="*{date}">
-			<span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Name Error</span>
-			<input type="hidden" th:field="*{id}">
-		</fieldset>
-		<fieldset>
-			<input type="submit" value="Submit Changes"></input>
-		</fieldset>
+		<table>
+			<tbody>
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" th:field="*{name}" /></td>
+					<td th:if="${#fields.hasErrors('name')}"
+						th:errors="*{name}"></td>
+				</tr>
+				<tr>
+					<td>Date:</td>
+					<td><input type="date" th:field="*{date}" /></td>
+					<td th:if="${#fields.hasErrors('date')}"
+						th:errors="*{date}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{year}"></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" th:field="*{id}"></td>
+				</tr> 
+			</tbody>
+		</table>	 
+		<a><input type="submit" value="Submit Changes" class="bclass" /></a>
 	</form>
-
 </div>
 </body>
 </html>

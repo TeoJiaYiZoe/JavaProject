@@ -1,15 +1,112 @@
 /* Add a black background color to the top navigation */
 
-.appForm {
+/* .appForm {
   width:700px;
   margin-left: 400px; 
   
-}
+} */
 
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Arial";
+  font-family: 'Open Sans';
+}
+
+/* Set padding to keep content from hitting the edges */
+/* .body-content {
+    padding-left: 200px;
+    padding-right: 15px;
+} */
+
+table
+{
+	font-size: 18px;
+	background: #fff;
+	border-collapse: collapse;
+	margin-bottom: 10px; 	
+}
+th
+{
+	font-size: 18px;
+	font-weight: 450px;
+	color: #039;
+	padding: 10px 8px 1px 10px;
+	border-bottom: 2px solid #6678b1;
+}
+td
+{
+	color: #669;
+	padding: 8px 8px 0px 10px;
+	
+}
+tbody tr:hover td
+{
+	color: #009;
+}
+
+h1 {
+	font-weight: 600;
+	font-size: 24px;
+	color: #355681;
+	padding: 20px;
+}
+h2 {
+	font-weight: 600;
+	font-size: 22px;
+	color: #355681;
+	padding: 20px;
+}
+
+.clicker {
+	font-weight: 600;
+	font-size: 18px;
+	color: #669;
+}
+
+/* button {
+	border : thin;
+	border-style : none none none none;
+	background : transparent;
+	margin : 0px 0px 0px 0px;
+	padding : 0px 0px 0px 0px;
+	white-space : normal;
+	width : auto;
+
+}
+.bclass {
+    background-color: #006080; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+  	position: absolute;
+  	margin-top: 10px;
+  	margin-bottom: 20px;    
+} */
+.bclass{
+  position: absolute;
+  margin-top: 15px;
+  text-decoration: none;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 16px;
+  padding: 16px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.bclass:hover {
+  background-color: #b3b3cc;
+  color: white;
 }
 
 .topnav-right {
@@ -17,11 +114,11 @@ body {
   margin-right: 10px; 
 }
 .topnav-center {
-  margin-left: 400px; 
+  margin-left: 440px; 
 }
 
 .topnav {
-  background-color: #9494b8;
+  background-color: #b3b3cc;
   overflow: hidden;
   height: 100px; /* Set the height of the header */
   width: 100%; /* Set the width of the header */
@@ -40,13 +137,13 @@ body {
 
  Change the color of links on hover 
 .topnav a:hover {
-  background-color: #8585ad;
+  background-color: #b3b3cc;
   color: white;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #9494b8;
+  background-color: #b3b3cc;
   color: white;
 }
 
@@ -59,7 +156,7 @@ body {
   z-index: 1; /* Stay on top */
   top: 100px; /* Stay at the top */
   left: 0;
-  background-color: #f0f0f5; /* Green */
+  background-color: #f0f0f5;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 40px;
 
@@ -67,10 +164,11 @@ body {
 
 /* The navigation menu links */
 .sidenav a {
-  padding: 6px 8px 6px 16px;
+  padding: 8px 8px 6px 16px;
   text-decoration: none;
   font-size: 18px;
-  color: black;
+  color: #355681;
+  font-weight: 500;
   display: block;
 }
 

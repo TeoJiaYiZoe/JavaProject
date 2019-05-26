@@ -48,8 +48,6 @@ public class LeaveApplication {
 	private LeaveType leavetype;
 	private String status;
 	
-	@NotEmpty
-	@Size(min=5,max=100)
 	private String comment;
 	
 	public LeaveApplication() {

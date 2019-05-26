@@ -8,10 +8,12 @@
 </head>
 <body>
 <div align="center">
+	<div th:if="${#lists.isEmpty(listLeave)}">
+	<h1>No leave records found</h1>
+	</div>
+	<div th:unless="${#lists.isEmpty(listLeave)}">
 	<h1>My Leave History</h1>
-
-	<br><br>
-	<table border="1" cellpadding="10">
+	<table>
 		<thead>
 			<tr>
 				<th>StartDate</th>
@@ -33,6 +35,7 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 </div>
 </body>
 </html>
