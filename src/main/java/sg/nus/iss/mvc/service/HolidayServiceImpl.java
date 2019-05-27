@@ -51,7 +51,7 @@ public class HolidayServiceImpl implements HolidayService {
 	@Transactional
 	public boolean isBalanceEnough(LeaveApplication la) {
 		LeaveBalance lb = leaveBalanceRepo.findByStaffAndLeavetype(la.getStaff(), la.getLeavetype());
-		int balance = lb.getBalance();
+		double balance = lb.getBalance();
 		int leavedays = findLeaveDaysWithoutHoliday(la.getStartDate(), la.getEndDate());
 		if (leavedays > balance) {
 			return false;

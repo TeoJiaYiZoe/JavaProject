@@ -28,13 +28,13 @@ public class LeaveBalance implements Serializable{
 	private Staff staff;
 	
 	@Column(name="leave_available")
-	private int balance;
+	private double balance;
 	
 	public LeaveBalance() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public LeaveBalance(LeaveType leavetype, Staff Staff, int balance) {
+	public LeaveBalance(LeaveType leavetype, Staff Staff, double balance) {
 		super();
 		this.leavetype = leavetype;
 		this.staff = Staff;
@@ -52,10 +52,10 @@ public class LeaveBalance implements Serializable{
 	public void setStaff(Staff Staff) {
 		this.staff = Staff;
 	}
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	@Override

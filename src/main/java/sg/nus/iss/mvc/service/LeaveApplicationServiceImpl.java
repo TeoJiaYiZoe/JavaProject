@@ -49,7 +49,7 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 	@Transactional
 	public boolean overlapWithHistory(LeaveApplication la) {
 		String s= "APPLIED";
-		List<LeaveApplication> las = leaveApplicationRepo.findByStaffAccordingStatus(la.getStaff());
+		List<LeaveApplication> las = leaveApplicationRepo.findByStaffAccordingStatus(la.getStaff().getStaffId());
 		LocalDate start = la.getStartDate();
 		LocalDate end = la.getEndDate();
 		for (LeaveApplication leavr_app : las) {

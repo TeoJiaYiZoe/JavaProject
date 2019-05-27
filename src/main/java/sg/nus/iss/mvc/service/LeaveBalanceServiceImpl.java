@@ -31,7 +31,7 @@ public class LeaveBalanceServiceImpl implements LeaveBalanceService{
 	
 	@Override
 	@Transactional
-	public void saveBalanceByStaffAndType(LeaveType leavetype, int bal, Staff Staff) {
+	public void saveBalanceByStaffAndType(LeaveType leavetype, double bal, Staff Staff) {
 		leaveBalanceRepo.saveBalanceByStaffAndType(leavetype.getTypeId(), bal, Staff.getStaffId());
 	}
 	

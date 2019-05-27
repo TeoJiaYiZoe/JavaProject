@@ -23,7 +23,7 @@ public interface LeaveBalanceRepository extends JpaRepository<LeaveBalance,Leave
 	@Transactional
 	@Modifying
 	@Query("update LeaveBalance lb set lb.balance = :bal where lb.staff.staffId = :staffid and lb.leavetype.typeId = :leavetypeid")
-	void saveBalanceByStaffAndType(@Param("leavetypeid") int leavetypeid, @Param("bal") int bal, @Param("staffid") int staffid);
+	void saveBalanceByStaffAndType(@Param("leavetypeid") int leavetypeid, @Param("bal") double bal, @Param("staffid") int staffid);
 	
 	@Transactional
 	@Modifying
@@ -45,6 +45,6 @@ public interface LeaveBalanceRepository extends JpaRepository<LeaveBalance,Leave
 	@Modifying
 	@Query(value = 
 			"UPDATE LeaveBalance lb SET lb.balance = :leavebalance WHERE lb.leavetype.typeId = :leavetypeid AND lb.staff.staffId = :staffid")
-	void updateAndSave(@Param("leavetypeid") int leavetypeId, @Param("staffid") int staffId, @Param("leavebalance") int leaveBalance);
+	void updateAndSave(@Param("leavetypeid") int leavetypeId, @Param("staffid") int staffId, @Param("leavebalance") double d);
 	
 }

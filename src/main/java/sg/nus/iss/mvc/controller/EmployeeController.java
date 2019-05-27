@@ -43,7 +43,7 @@ public class EmployeeController {
 
 	@Autowired
 	private MailService mailService;
-	
+
 	@Autowired
 	private LeaveApplicationValidator laValidator;
 
@@ -68,10 +68,10 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(path = "/leave/apply", method = RequestMethod.GET)
-	public String createLeaveApplication(Model model,@ModelAttribute("User") Staff staff) {
+	public String createLeaveApplication(Model model, @ModelAttribute("User") Staff staff) {
 		LeaveApplication la = new LeaveApplication();
 		la.setStaff(staff);
-		model.addAttribute("leave_application",la);
+		model.addAttribute("leave_application", la);
 		List<LeaveType> leave_types = leave_typeRepo.findAll();
 		model.addAttribute("leave_types", leave_types);
 		return "leaveApplicationForm";
@@ -89,103 +89,127 @@ public class EmployeeController {
 		}
 
 		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(staff, leave_application.getLeavetype());
-		int balance = lb.getBalance();
+		double balance = lb.getBalance();
 		int leavedays = holidaySer.findLeaveDaysWithoutHoliday(leave_application.getStartDate(),
 				leave_application.getEndDate());
-		if (leavedays <= balance) {
-			int bal = balance - leavedays;
+		if (leave_application.getLeavetype().getTypeId() == 3 || leave_application.getLeavetype().getTypeId() == 4) {
+			if (leavedays == 1 && (leave_application.getLeavetype().getTypeId() == 3
+					|| leave_application.getLeavetype().getTypeId() == 4)) {
+				double bal = balance - 0.5;
+				System.out.println(bal);
+				leave_applicationRepo.save(leave_application);
+				leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
+				return "HomePage";
+			} else
+				return "cannottakemorethanoneday";
+
+		}
+		if (leavedays <= balance && (leave_application.getLeavetype().getTypeId() == 2
+				|| leave_application.getLeavetype().getTypeId() == 1)) {
+			double bal = balance - leavedays;
 			leave_applicationRepo.save(leave_application);
 			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
+			return "HomePage";
+
 		}
 		Staff from = leave_application.getStaff();
 		mailService.sendApplyLeaveMail(from.getEmail(), from.getStaff().getEmail());
-			 
+
 		return "redirect:/leave";
 	}
-	
+
 	@RequestMapping(path = "/leave/balance")
-    public String viewLeaveBalance(Model model, @ModelAttribute("User") Staff staff) {
+	public String viewLeaveBalance(Model model, @ModelAttribute("User") Staff staff) {
 		List<LeaveBalance> listBalanceLeave = leaveBalanceSer.findByStaff(staff);
 		model.addAttribute("listBalanceLeave", listBalanceLeave);
-        return "leaveBalance";
-    }
-	
+		return "leaveBalance";
+	}
+
 	@RequestMapping(path = "/leave")
-    public String viewLeave(Model model, @ModelAttribute("User") Optional<Staff> staff) {
+	public String viewLeave(Model model, @ModelAttribute("User") Optional<Staff> staff) {
 		List<LeaveApplication> listLeave = leave_applicationRepo.findLeaveByStaff(staff);
 		model.addAttribute("listLeave", listLeave);
-        return "leave";
-    }
-	
+		return "leave";
+	}
+
 	@RequestMapping(path = "/leave/viewDetails/{id}", method = RequestMethod.GET)
-    public String viewLeaveDetails(Model model, @PathVariable(value = "id") Integer id) {   	
-    	LeaveApplication leave = leave_applicationRepo.findById(id).orElse(null);
-    	System.out.println(leave);
-        model.addAttribute("leaveDetails", leave);
-        return "details";
-    }
-	
-    @RequestMapping(path = "/leave/edit/{id}", method = RequestMethod.GET)
-    public String editLeave(Model model, @PathVariable(value = "id") Integer id) {   	
-    	LeaveApplication leaveEdit = leave_applicationRepo.findById(id).orElse(null);
-    	System.out.println(leaveEdit);
-        model.addAttribute("leave_application", leaveEdit);
-        return "edit";
-    }
-    
-    @RequestMapping(path = "/leave/save", method = RequestMethod.POST)
-    public String saveLeaveDetails(@ModelAttribute("leave_application") @Valid LeaveApplication leave_application, BindingResult bindingResult) {
-    	if (bindingResult.hasErrors()) {
-    		return "edit";
-    	}
-    	int id = leave_application.getId();
-    	LeaveApplication leaveAp = leave_applicationRepo.findByid(id);
-    	Staff s = leaveAp.getStaff();
-    	LeaveBalance lbal = leaveBalanceSer.findByStaffAndLeavetype(s, leaveAp.getLeavetype());
-    	int balance1 = lbal.getBalance();
-    	int leavedaysNo = holidaySer.findLeaveDaysWithoutHoliday(leaveAp.getStartDate(),
-    			leaveAp.getEndDate());
-    	int rollbackBal = balance1+leavedaysNo;
-    	
+	public String viewLeaveDetails(Model model, @PathVariable(value = "id") Integer id) {
+		LeaveApplication leave = leave_applicationRepo.findById(id).orElse(null);
+		System.out.println(leave);
+		model.addAttribute("leaveDetails", leave);
+		return "details";
+	}
+
+	@RequestMapping(path = "/leave/edit/{id}", method = RequestMethod.GET)
+	public String editLeave(Model model, @PathVariable(value = "id") Integer id) {
+		LeaveApplication leaveEdit = leave_applicationRepo.findById(id).orElse(null);
+		System.out.println(leaveEdit);
+		model.addAttribute("leave_application", leaveEdit);
+		return "edit";
+	}
+
+	@RequestMapping(path = "/leave/save", method = RequestMethod.POST)
+	public String saveLeaveDetails(@ModelAttribute("leave_application") @Valid LeaveApplication leave_application,
+			BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "edit";
+		}
+		int id = leave_application.getId();
+		LeaveApplication leaveAp = leave_applicationRepo.findByid(id);
+		Staff s = leaveAp.getStaff();
+		LeaveBalance lbal = leaveBalanceSer.findByStaffAndLeavetype(s, leaveAp.getLeavetype());
+		double balance1 = lbal.getBalance();
+		int leavedaysNo = holidaySer.findLeaveDaysWithoutHoliday(leaveAp.getStartDate(), leaveAp.getEndDate());
+		double rollbackBal = balance1 + leavedaysNo;
+
 		int leavedays = holidaySer.findLeaveDaysWithoutHoliday(leave_application.getStartDate(),
 				leave_application.getEndDate());
 		if (leavedays <= rollbackBal) {
-			int bal = rollbackBal-leavedays;
+			double bal = rollbackBal - leavedays;
 			leave_applicationRepo.save(leave_application);
-			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, leave_application.getStaff());
+			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal,
+					leave_application.getStaff());
 			return "redirect:/leave";
 		} else {
 			return "insufficientLeaveBalanceErrorPage";
 		}
-    }
-    
-    @RequestMapping(path = "/leave/delete/{id}", method = RequestMethod.GET)
-    public String deleteLeave(@PathVariable(name = "id") Integer id) {
-        LeaveApplication la = leave_applicationRepo.findById(id).orElse(null);
-        la.setStatus("DELETED");
-        Staff s = la.getStaff();
-    	LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(s, la.getLeavetype());
-    	int balance = lb.getBalance();
-    	int leavedays = holidaySer.findLeaveDaysWithoutHoliday(la.getStartDate(),
-    			la.getEndDate());
-    	int bal = balance+leavedays;
-    	leave_applicationRepo.save(la);
-    	leaveBalanceSer.saveBalanceByStaffAndType(la.getLeavetype(), bal, s);
-        return "redirect:/leave";
-    }
+	}
 
-    @RequestMapping(path = "/leave/cancel/{id}", method = RequestMethod.GET)
-    public String cancelApprovedLeave(@PathVariable(name = "id") Integer id) {
-        LeaveApplication la = leave_applicationRepo.findById(id).orElse(null);
-        la.setStatus("CANCELLED");
-        Staff s = la.getStaff();
-    	LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(s, la.getLeavetype());
-    	int balance = lb.getBalance();
-    	int leavedays = holidaySer.findLeaveDaysWithoutHoliday(la.getStartDate(),
-    			la.getEndDate());
-    	int bal = balance+leavedays;
-    	leave_applicationRepo.save(la);
-    	leaveBalanceSer.saveBalanceByStaffAndType(la.getLeavetype(), bal, s);
-        return "redirect:/leave";
-    }
+	@RequestMapping(path = "/leave/delete/{id}", method = RequestMethod.GET)
+	public String deleteLeave(@PathVariable(name = "id") Integer id) {
+		LeaveApplication la = leave_applicationRepo.findById(id).orElse(null);
+		la.setStatus("DELETED");
+		Staff s = la.getStaff();
+		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(s, la.getLeavetype());
+		double balance = lb.getBalance();
+		int leavedays = holidaySer.findLeaveDaysWithoutHoliday(la.getStartDate(), la.getEndDate());
+		double bal = 0;
+		if (la.getLeavetype().getTypeId() == 3 || la.getLeavetype().getTypeId() == 4) {
+			bal = balance + 0.5;
+		} else {
+			bal = balance + leavedays;
+		}
+		leave_applicationRepo.save(la);
+		leaveBalanceSer.saveBalanceByStaffAndType(la.getLeavetype(), bal, s);
+		return "redirect:/leave";
+	}
+
+	@RequestMapping(path = "/leave/cancel/{id}", method = RequestMethod.GET)
+	public String cancelApprovedLeave(@PathVariable(name = "id") Integer id) {
+		LeaveApplication la = leave_applicationRepo.findById(id).orElse(null);
+		la.setStatus("CANCELLED");
+		Staff s = la.getStaff();
+		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(s, la.getLeavetype());
+		double balance = lb.getBalance();
+		int leavedays = holidaySer.findLeaveDaysWithoutHoliday(la.getStartDate(), la.getEndDate());
+		double bal = 0;
+		if (la.getLeavetype().getTypeId() == 3 || la.getLeavetype().getTypeId() == 4) {
+			bal = balance + 0.5;
+		} else {
+			bal = balance + leavedays;
+		}
+		leave_applicationRepo.save(la);
+		leaveBalanceSer.saveBalanceByStaffAndType(la.getLeavetype(), bal, s);
+		return "redirect:/leave";
+	}
 }

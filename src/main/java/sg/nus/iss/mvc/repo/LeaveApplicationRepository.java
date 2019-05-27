@@ -20,8 +20,8 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 	public List<LeaveApplication> findByStaff(Staff s);
 	
 	@Transactional
-	@Query("SELECT la from LeaveApplication la where la.status = 'APPROVED' or la.status = 'APPLIED'")
-	public List<LeaveApplication> findByStaffAccordingStatus(Staff s);
+	@Query("SELECT la from LeaveApplication la where la.staff.staffId = :staffid and la.status in ('APPROVED','APPLIED')")
+	public List<LeaveApplication> findByStaffAccordingStatus(@Param("staffid") int staffid);
 	
 	@Transactional
 	@Query("SELECT la FROM Staff s, LeaveApplication la WHERE s.staffId = la.staff.staffId AND s.staff.staffId = ?1 AND la.status='APPLIED'")

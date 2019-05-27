@@ -6,22 +6,28 @@ public class LeaveBalanceBean {
 	private String leavetypeName;
 	private int staffId;
 	private String staffName;
-	private int leaveBalance;
+	private double leaveBalance;
 	public LeaveBalanceBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + leaveBalance;
+		long temp;
+		temp = Double.doubleToLongBits(leaveBalance);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + leavetypeId;
 		result = prime * result + ((leavetypeName == null) ? 0 : leavetypeName.hashCode());
 		result = prime * result + staffId;
 		result = prime * result + ((staffName == null) ? 0 : staffName.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -31,7 +37,7 @@ public class LeaveBalanceBean {
 		if (getClass() != obj.getClass())
 			return false;
 		LeaveBalanceBean other = (LeaveBalanceBean) obj;
-		if (leaveBalance != other.leaveBalance)
+		if (Double.doubleToLongBits(leaveBalance) != Double.doubleToLongBits(other.leaveBalance))
 			return false;
 		if (leavetypeId != other.leavetypeId)
 			return false;
@@ -49,6 +55,8 @@ public class LeaveBalanceBean {
 			return false;
 		return true;
 	}
+
+
 	@Override
 	public String toString() {
 		return "LeaveBalanceBean [leavetypeId=" + leavetypeId + ", leavetypeName=" + leavetypeName + ", staffId="
@@ -78,11 +86,11 @@ public class LeaveBalanceBean {
 	public void setStaffName(String staffName) {
 		this.staffName = staffName;
 	}
-	public int getLeaveBalance() {
+	public double getLeaveBalance() {
 		return leaveBalance;
 	}
-	public void setLeaveBalance(int leaveBalance) {
-		this.leaveBalance = leaveBalance;
+	public void setLeaveBalance(double d) {
+		this.leaveBalance = d;
 	}
 	
 	

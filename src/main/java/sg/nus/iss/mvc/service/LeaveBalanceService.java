@@ -15,6 +15,6 @@ public interface LeaveBalanceService {
 	LeaveBalance findByStaffAndLeavetype(Staff Staff, LeaveType leavetype);
 	List<LeaveBalance> findByStaff(Staff Staff);
 	
-	void saveBalanceByStaffAndType(LeaveType leavetype, int bal, Staff Staff);
+	void saveBalanceByStaffAndType(LeaveType leavetype, double bal, Staff Staff);
 
 }
