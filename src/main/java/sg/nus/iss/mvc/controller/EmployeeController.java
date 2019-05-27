@@ -103,7 +103,7 @@ public class EmployeeController {
 			} else
 				return "cannottakemorethanoneday";
 		}
-		if (leavedays <= balance && (leave_application.getLeavetype().getTypeId() != 3
+		else if (leavedays <= balance && (leave_application.getLeavetype().getTypeId() != 3
 				|| leave_application.getLeavetype().getTypeId() != 4)) {
 			double bal = balance - leavedays;
 			leave_applicationRepo.save(leave_application);

@@ -28,7 +28,7 @@ public class LoginController {
 		this.staffRepo = staffRepo;
 	}
 
-	@RequestMapping(path = "login", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/login"}, method = RequestMethod.GET)
 	public String loginPage(Model model) {
 		model.addAttribute("User", new User());
 		return "loginForm";

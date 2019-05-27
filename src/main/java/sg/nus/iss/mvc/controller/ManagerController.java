@@ -65,7 +65,7 @@ public class ManagerController {
 	    		//System.out.println(bindingResult.getFieldError("comment"));
 	            return "leaveRequest-edit";
 	        }
-	    	if (leave_application.getStatus()=="REJECTED") {
+	    	if (leave_application.getStatus().equals("REJECTED")) {
 	    		Staff s = leave_application.getStaff();
 	    		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(s, leave_application.getLeavetype());
 	    		double balance = lb.getBalance();
@@ -76,6 +76,7 @@ public class ManagerController {
 	    		} else {
 	    			bal = balance + leavedays;
 	    		}
+	    		leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, s);
 	    	}
 	    	leave_applicationRepo.save(leave_application);
 	    	int sid = leave_application.getStaff().getStaffId();
