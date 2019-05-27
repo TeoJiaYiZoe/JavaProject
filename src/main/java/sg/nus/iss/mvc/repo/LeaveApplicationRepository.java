@@ -19,6 +19,9 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 	
 	public List<LeaveApplication> findByStaff(Staff s);
 	
+	@Query("SELECT la FROM LeaveApplication la WHERE la.startDate >= :startDate AND la.endDate <= :endDate")
+	List<LeaveApplication> getleavelist(LocalDate startDate,LocalDate endDate);
+	
 	@Transactional
 	@Query("SELECT la from LeaveApplication la where la.staff.staffId = :staffid and la.status in ('APPROVED','APPLIED')")
 	public List<LeaveApplication> findByStaffAccordingStatus(@Param("staffid") int staffid);

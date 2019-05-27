@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+</head>
+<body>
+<div align="center">
+	<form th:action="@{/manager/getleave}" th:object="${ReportBeans}"
+		method=post>
+		<table>
+			<tbody>
+				<tr>
+					<td>Start Date:</td>
+					<td><input type="date" th:field="*{StartDate}"/></td>
+				</tr>
+				<tr>
+					<td>End Date:</td>
+					<td><input type="date" th:field="*{EndDate}" /></td>
+				</tr> 
+			</tbody>
+		</table>	 
+		<a><input type="submit" value="Submit" class="bclass" /></a>
+	</form>
+</div>
+</body>
+</html>

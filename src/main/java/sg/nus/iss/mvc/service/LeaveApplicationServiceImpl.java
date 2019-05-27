@@ -60,5 +60,15 @@ public class LeaveApplicationServiceImpl implements LeaveApplicationService {
 		}
 		return false;
 	}
+	@Override	
+	public List<LeaveApplication> findAll() {
+		return leaveApplicationRepo.findAll(); 
+	}
+
+	
+	public List<LeaveApplication> getleavelist(LocalDate startDate,LocalDate endDate) {
+		// TODO Auto-generated method stub
+		return leaveApplicationRepo.getleavelist(startDate, endDate);
+	}
 
 }

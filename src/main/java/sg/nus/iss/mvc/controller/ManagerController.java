@@ -10,22 +10,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import sg.nus.iss.mvc.javabean.ReportBean;
 import sg.nus.iss.mvc.model.LeaveApplication;
 import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.repo.LeaveApplicationRepository;
 import sg.nus.iss.mvc.repo.StaffRepository;
+import sg.nus.iss.mvc.service.LeaveApplicationService;
 import sg.nus.iss.mvc.service.MailService;
 
 @Controller
 @SessionAttributes("User")
 public class ManagerController {
-
+    
+	@Autowired
+	private LeaveApplicationService leaveApplicationService;
+	
 	private LeaveApplicationRepository leave_applicationRepo;
 	private StaffRepository staff_typeRepo;
 	
@@ -94,4 +101,25 @@ public class ManagerController {
 	        model.addAttribute("leaveDetails_subordinate", leaveDetails);
 	        return "subordinateLeaveDetails";
 	    }
+	    @GetMapping(value="/manager/dateselect")
+	    public ModelAndView GetDatesView() {
+	 	  ModelAndView mav = new ModelAndView();
+	 	  mav.addObject("ReportBeans", new ReportBean()); 
+	 	  mav.setViewName("dateselectView");
+	 	  return mav;
+	    }
+	    @RequestMapping(path = "/manager/getleave", method = RequestMethod.POST)
+		public String getLeaves(ReportBean reportBean
+				, Model model) {
+		    System.out.println(reportBean.getStartDate());
+		    System.out.println(reportBean.getEndDate());
+		    LocalDate startDate = reportBean.getStartDate();
+		    LocalDate endDate = reportBean.getEndDate();
+		    
+		    List<LeaveApplication> leaveApplicationList = leaveApplicationService.getleavelist(startDate,endDate);
+		    
+			//List<LeaveApplication> leaveApplicationList = leaveApplicationService.findAll();
+			model.addAttribute("leaveApplicationList", leaveApplicationList);
+			return "report";
+		}
 }

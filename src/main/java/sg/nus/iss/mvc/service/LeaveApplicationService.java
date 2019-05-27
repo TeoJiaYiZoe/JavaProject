@@ -24,5 +24,13 @@ public interface LeaveApplicationService {
 	//boolean overlapWithHistory(LeaveApplication la, Optional<Staff> s);
 
 	boolean overlapWithHistory(LeaveApplication la);
+	
+	List<LeaveApplication> findAll();
+	 
+	 
+	 //boolean createCsv(List<LeaveApplication> leaveApplicationList,ServletContext context);
+
+
+	 List<LeaveApplication> getleavelist(LocalDate startDate, LocalDate endDate);
 
 }
