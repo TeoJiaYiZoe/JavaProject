@@ -99,17 +99,16 @@ public class EmployeeController {
 				System.out.println(bal);
 				leave_applicationRepo.save(leave_application);
 				leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
-				return "HomePage";
+				// return "HomePage";
 			} else
 				return "cannottakemorethanoneday";
-
 		}
 		if (leavedays <= balance && (leave_application.getLeavetype().getTypeId() == 2
 				|| leave_application.getLeavetype().getTypeId() == 1)) {
 			double bal = balance - leavedays;
 			leave_applicationRepo.save(leave_application);
 			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
-			return "HomePage";
+			// return "HomePage";
 
 		}
 		Staff from = leave_application.getStaff();
