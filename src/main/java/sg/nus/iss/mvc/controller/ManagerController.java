@@ -20,6 +20,7 @@ import sg.nus.iss.mvc.model.LeaveApplication;
 import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.repo.LeaveApplicationRepository;
 import sg.nus.iss.mvc.repo.StaffRepository;
+import sg.nus.iss.mvc.service.MailService;
 
 @Controller
 @SessionAttributes("User")
@@ -36,7 +37,8 @@ public class ManagerController {
 	public void setStaff_typeRepo(StaffRepository staff_typeRepo) {
 		this.staff_typeRepo = staff_typeRepo;
 	}
-	
+	@Autowired
+	private MailService mailService;
 	 @RequestMapping(path = "manager/leaverequest/submit", method = RequestMethod.POST)
 	    public String save(Model model, @ModelAttribute("leave_application") @Valid LeaveApplication leave_application, BindingResult bindingResult,@ModelAttribute("User") Staff staff) {
 	    	if (bindingResult.hasErrors()) {
@@ -49,6 +51,9 @@ public class ManagerController {
 	        }
 	    	
 	    	leave_applicationRepo.save(leave_application);
+	    	int sid = leave_application.getStaff().getStaffId();
+	    	Staff from = staff_typeRepo.findByStaffId(sid);
+	    	mailService.sendLeaveUpdateMail(from.getEmail(), from.getStaff().getEmail());
 	        return "redirect:/manager/leaverequest";
 	    }
 	    @RequestMapping(path = "manager/leaverequest", method = RequestMethod.GET)

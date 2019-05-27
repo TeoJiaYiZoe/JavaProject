@@ -53,7 +53,7 @@ public class HolidayServiceImpl implements HolidayService {
 		LeaveBalance lb = leaveBalanceRepo.findByStaffAndLeavetype(la.getStaff(), la.getLeavetype());
 		int balance = lb.getBalance();
 		int leavedays = findLeaveDaysWithoutHoliday(la.getStartDate(), la.getEndDate());
-		if (leavedays >= balance) {
+		if (leavedays > balance) {
 			return false;
 		}
 		return true;

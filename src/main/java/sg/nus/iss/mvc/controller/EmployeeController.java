@@ -26,6 +26,7 @@ import sg.nus.iss.mvc.repo.LeaveTypeRepository;
 import sg.nus.iss.mvc.service.HolidayService;
 import sg.nus.iss.mvc.service.LeaveApplicationService;
 import sg.nus.iss.mvc.service.LeaveBalanceService;
+import sg.nus.iss.mvc.service.MailService;
 import sg.nus.iss.mvc.validator.LeaveApplicationValidator;
 
 @Controller
@@ -40,6 +41,9 @@ public class EmployeeController {
 	@Autowired
 	private LeaveApplicationService leaveApplicationSer;
 
+	@Autowired
+	private MailService mailService;
+	
 	@Autowired
 	private LeaveApplicationValidator laValidator;
 
@@ -93,6 +97,9 @@ public class EmployeeController {
 			leave_applicationRepo.save(leave_application);
 			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
 		}
+		Staff from = leave_application.getStaff();
+		mailService.sendApplyLeaveMail(from.getEmail(), from.getStaff().getEmail());
+			 
 		return "redirect:/leave";
 	}
 	

@@ -35,6 +35,9 @@ public class Staff {
 	private String password;
 	@OneToMany(targetEntity = LeaveApplication.class, mappedBy = "staff")
 	private Collection<LeaveApplication> leave_application;
+
+	@Column(name="email")
+	private String email;
 	
 	@OneToOne
 	@JoinColumn(name="boss_id")
@@ -52,8 +55,17 @@ public class Staff {
 		this.designation = designation;
 		this.password = password;
 	}
-	//GETTERS & SETTERS
+	
+	
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	//GETTERS & SETTERS
 	public int getStaffId() {
 		return staffId;
 	}

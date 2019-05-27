@@ -36,5 +36,8 @@ public interface StaffRepository extends JpaRepository<Staff,Integer>{
 	@Query(value = "UPDATE Staff s SET s.staff.staffId = 1 WHERE s.staff.staffId = :staffid")
 	void removeBossFromSubordinates(@Param("staffid") int bossid);
 
+	@Transactional
+	@Query("SELECT s FROM Staff s where s.staffId = ?1")
+	public Staff findByStaffId(int id);
 	
 }
