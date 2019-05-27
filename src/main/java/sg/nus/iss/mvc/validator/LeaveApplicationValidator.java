@@ -41,27 +41,27 @@ public class LeaveApplicationValidator implements Validator {
 		// TODO Auto-generated method stub
 		LeaveApplication la = (LeaveApplication) target;
 		if ((la.getStartDate() != null) && (la.getEndDate() != null) && la.getStartDate().isAfter(la.getEndDate())) {
-			errors.reject("startDate", "End date should be greater than start date.");
-			errors.rejectValue("startDate", "error.dates", "End date should be greater than start date.");
-			errors.reject("endDate", "End date should be greater than start date.");
-			errors.rejectValue("endDate", "error.dates", "End date should be greater than start date.");
+			errors.reject("startDate", "End date should be after start date.");
+			errors.rejectValue("startDate", "error.dates", "End date should be after start date.");
+			errors.reject("endDate", "End date should be after start date.");
+			errors.rejectValue("endDate", "error.dates", "End date should be after start date.");
 		}
 		else if((la.getStartDate() != null) && (!la.getStartDate().isAfter(LocalDate.now()))) {
-			errors.reject("startDate", "Start date should be greater than today.");
-			errors.rejectValue("startDate", "error.dates", "Start date should be greater than today.");
+			errors.reject("startDate", "Start date should be after today.");
+			errors.rejectValue("startDate", "error.dates", "Start date should be after today.");
 		}
 		else if ((la.getStartDate() != null) && (la.getEndDate() != null) && !holidaySer.isWorkingDay(la)) {
-			errors.reject("startDate", "Please do select a working day.");
+			errors.reject("startDate", "Please select a working day.");
 			errors.rejectValue("startDate", "error.dates", "Please select a working day.");
 			errors.reject("endDate", "Please select a working day.");
 			errors.rejectValue("endDate", "error.dates", "Please select a working day.");
 		}
 		
 		else if ((la.getStartDate() != null) && (la.getEndDate() != null) && leaveApplicationSer.overlapWithHistory(la)) {
-			errors.reject("startDate", "You have already applied leave for this period.");
-			errors.rejectValue("startDate", "error.dates", "You have already applied leave for this period.");
-			errors.reject("endDate", "You have already applied leave for this period.");
-			errors.rejectValue("endDate", "error.dates", "You have already applied leave for this period.");
+			errors.reject("startDate", "Duplicate leave record!");
+			errors.rejectValue("startDate", "error.dates", "Duplicate leave record!.");
+			errors.reject("endDate", "Duplicate leave record!");
+			errors.rejectValue("endDate", "error.dates", "Duplicate leave record!");
 		}
 		else if ((la.getStartDate() != null) && (la.getEndDate() != null) && !holidaySer.isBalanceEnough(la)) {
 			errors.reject("startDate", "Balance Not Enough!");

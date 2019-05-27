@@ -8,38 +8,40 @@
 
 </head>
 <body>
-	<div align="center" class="appForm">
+	<div align="center">
 		<h1>Manage Leave Entitlement</h1>
 
 		<h2>Select a staff to update leave entitlement.</h2>
 		</br>
 
 		<table id="entitlement">
-			<tr>
-				<td>Staff Id</td>
-				<td></td>
-				<td>Staff Name</td>
-				<td></td>
-				<td>Leave Type</td>
-				<td></td>
-				<td>Leave Balance</td>
-				<td></td>
-			</tr>
-			<tr></tr>
-			<tr th:each=" leavebalance : ${allbalance}">
-				<td th:text="${leavebalance.staff.staffId}">Staff Id</td>
-				<td></td>
-				<td th:text="${leavebalance.staff.staffName}">Staff Name</td>
-				<td></td>
-				<td th:text="${leavebalance.leavetype.typeName}">Leave Type Name</td>
-				<td></td>
-				<td th:text="${leavebalance.balance}">Leave Balance</td>
-				<td></td>
-				<td><a
-					th:href="${'/admin/leavebalance/edit/' + leavebalance.staff.staffId + '/' + leavebalance.leavetype.typeId }">Update</a></td>
-				<td></td>
-
-			</tr>
+			<thead>
+				<tr>
+					<th>Staff Id</th>
+					<th></th>
+					<th>Staff Name</th>
+					<th></th>
+					<th>Leave Type</th>
+					<th></th>
+					<th>Leave Balance</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each=" leavebalance : ${allbalance}">
+					<td th:text="${leavebalance.staff.staffId}">Staff Id</td>
+					<td></td>
+					<td th:text="${leavebalance.staff.staffName}">Staff Name</td>
+					<td></td>
+					<td th:text="${leavebalance.leavetype.typeName}">Leave Type Name</td>
+					<td></td>
+					<td th:text="${leavebalance.balance}">Leave Balance</td>
+					<td></td>
+					<td><a
+						th:href="${'/admin/leavebalance/edit/' + leavebalance.staff.staffId + '/' + leavebalance.leavetype.typeId }">Update</a></td>
+					<td></td>
+				</tr>
+			</tbody>
 		</table>
 
 	</div>

@@ -20,10 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sg.nus.iss.mvc.javabean.ReportBean;
 import sg.nus.iss.mvc.model.LeaveApplication;
+import sg.nus.iss.mvc.model.LeaveBalance;
 import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.repo.LeaveApplicationRepository;
 import sg.nus.iss.mvc.repo.StaffRepository;
+import sg.nus.iss.mvc.service.HolidayService;
 import sg.nus.iss.mvc.service.LeaveApplicationService;
+import sg.nus.iss.mvc.service.LeaveBalanceService;
 import sg.nus.iss.mvc.service.MailService;
 
 @Controller
@@ -32,13 +35,19 @@ public class ManagerController {
     
 	@Autowired
 	private LeaveApplicationService leaveApplicationService;
-	
+	@Autowired
+	private HolidayService holidaySer;
 	private LeaveApplicationRepository leave_applicationRepo;
 	private StaffRepository staff_typeRepo;
+	private LeaveBalanceService leaveBalanceSer;
 	
 	@Autowired
 	public void setLeaveApplicationRepo(LeaveApplicationRepository leave_applicationRepo) {
 		this.leave_applicationRepo = leave_applicationRepo;
+	}
+	@Autowired
+	public void setLeaveBalanceSer(LeaveBalanceService leaveBalanceSer) {
+		this.leaveBalanceSer = leaveBalanceSer;
 	}
 	@Autowired
 	public void setStaff_typeRepo(StaffRepository staff_typeRepo) {
@@ -56,7 +65,18 @@ public class ManagerController {
 	    		//System.out.println(bindingResult.getFieldError("comment"));
 	            return "leaveRequest-edit";
 	        }
-	    	
+	    	if (leave_application.getStatus()=="REJECTED") {
+	    		Staff s = leave_application.getStaff();
+	    		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(s, leave_application.getLeavetype());
+	    		double balance = lb.getBalance();
+	    		int leavedays = holidaySer.findLeaveDaysWithoutHoliday(leave_application.getStartDate(), leave_application.getEndDate());
+	    		double bal = 0;
+	    		if (leave_application.getLeavetype().getTypeId() == 3 || leave_application.getLeavetype().getTypeId() == 4) {
+	    			bal = balance + 0.5;
+	    		} else {
+	    			bal = balance + leavedays;
+	    		}
+	    	}
 	    	leave_applicationRepo.save(leave_application);
 	    	int sid = leave_application.getStaff().getStaffId();
 	    	Staff from = staff_typeRepo.findByStaffId(sid);

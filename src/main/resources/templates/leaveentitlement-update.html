@@ -2,16 +2,14 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Update leave entitlement</title>
+<title>Update Leave Entitlement</title>
 <th:block th:replace="fragments/header"></th:block>
 <th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-	<div align="center" class="appForm">
-		<h1>Update leave entitlement</h1>
-
-		</br>
-
+	<div align="center">
+		<h1>Update Leave Entitlement</h1>
+		
 		<form th:action="@{/admin/updateleavebalance}" th:object="${leavebalance}"	method=post>
 
 		<fieldset>
