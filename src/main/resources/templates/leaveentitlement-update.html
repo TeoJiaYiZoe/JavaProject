@@ -11,24 +11,30 @@
 		<h1>Update Leave Entitlement</h1>
 		
 		<form th:action="@{/admin/updateleavebalance}" th:object="${leavebalance}"	method=post>
+			<table>
+				<tbody>
+					<tr>
+						<td>Name:</td>
+						<td><input type="text" th:field="*{staffName}" readonly/></td>
+					</tr>
+					<tr>
+						<td>Leave Type:</td>
+						<td><input type="text" th:field="*{leavetypeName}" readonly/></td>
+					</tr>
+					<tr>
+						<td>Leave Balance:</td>
+						<td><input type="text" th:field="*{leaveBalance}"/></td>
+					</tr>
+					<tr>
+						<td><input type="hidden" th:field="*{staffId}"></td>
+					</tr>
+					<tr>
+						<td><input type="hidden" th:field="*{leavetypeId}"></td>
+					</tr>
+				</tbody>
+			</table>
+				<a><input type="submit" value="Submit Changes" class="bclass" /></a>
 
-		<fieldset>
-			Name: <input type="text" th:field="*{staffName}" readonly>			
-			<input type="hidden" th:field="*{staffId}">
-		</fieldset>
-		
-		<fieldset>
-			LeaveType: <input type="text" th:field="*{leavetypeName}" readonly>	
-			<input type="hidden" th:field="*{leavetypeId}">
-		</fieldset>
-		
-		<fieldset>
-			Leave Balance: <input type="text" th:field="*{leaveBalance}">
-			
-		</fieldset>
-		<fieldset>
-			<input type="submit" value="Submit Changes"></input>
-		</fieldset>
 	</form>
 
 	</div>
