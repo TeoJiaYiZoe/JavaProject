@@ -17,14 +17,14 @@
   </br>
   <a th:href="@{/manager/leaverequest}">View Leave Application for Approval</a>
   <a th:href="@{/manager/leavehistory}">View Subordinates Leave History</a>
-  <a th:href="@{/manager/dateselect}">GenerateLeaveReport</a>
+  <a th:href="@{/manager/dateselect}">Generate Leave Report</a>
   </span>
   <span th:if="${session.User.getDesignation().getDesignationName() == 'Admin'}">
   </br>
   <a th:href="@{/admin/holiday-main}">Manage public holidays</a>
   <a th:href="@{/admin/leavetype-main}">Manage leave types</a>
-  <a th:href="@{/admin/leavebalance-main}">Manage leave entitlement</a>
-  <a th:href="@{/admin/staff}">Manage staff</a>
+  <a th:href="@{/admin/leavebalance-main}">Manage Leave Entitlement</a>
+  <a th:href="@{/admin/staff}">Manage Staff</a>
   </span>
 </div>
 </body>

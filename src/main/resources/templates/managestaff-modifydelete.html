@@ -7,7 +7,7 @@
 <th:block th:replace="fragments/sidebar"></th:block>
 </head>
 <body>
-<div align="center" class="appForm">
+<div align="center">
 		<h1>Modify Staff List</h1>
 	
 	<table>
@@ -34,10 +34,10 @@
 			<td><a th:href="${'/admin/staff/delete/'+staff.staffId}" th:if="${staff.staffId != 1}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
-	</br>
-	<a th:href="@{/admin/staffs1}">Back To Staff List</a>
-	</br>
-	<a th:href="@{/admin/staff}">Back To main Staff page</a>
+	<br>
+	<a th:href="@{/admin/staffs1}" class="bclass">Back To Staff List</a> 
+	<a th:href="@{/admin/staff}" class="bclass">Back To Main Staff page</a>
+
 	</div>
 </body>
 </html>
