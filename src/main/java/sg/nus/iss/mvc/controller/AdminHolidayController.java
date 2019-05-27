@@ -18,7 +18,7 @@ import sg.nus.iss.mvc.model.Holiday;
 import sg.nus.iss.mvc.repo.HolidayRepository;
 
 @Controller
-public class HolidayController {
+public class AdminHolidayController {
 	
 	private HolidayRepository holidayRepo;
 
@@ -47,7 +47,7 @@ public class HolidayController {
 		return "holiday-edit";
 	}
 	 
-	@RequestMapping(path = "/updateholiday", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/updateholiday", method = RequestMethod.POST)
 	public String updateHoliday(@ModelAttribute("currentHoliday") @Valid Holiday currentHoliday, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 
@@ -65,7 +65,7 @@ public class HolidayController {
 		return "holiday-add";
 	}
 	
-	@RequestMapping(path = "/addHoliday", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/addHoliday", method = RequestMethod.POST)
 	public String createHoliday(@Valid Holiday holiday, BindingResult bindingResult) {
 		 if (bindingResult.hasErrors()) {
 	            return "holiday-add";

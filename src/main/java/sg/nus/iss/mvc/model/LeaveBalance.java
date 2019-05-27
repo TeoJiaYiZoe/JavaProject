@@ -29,6 +29,7 @@ public class LeaveBalance implements Serializable{
 	
 	@Column(name="leave_available")
 	private int balance;
+	
 	public LeaveBalance() {
 		super();
 		// TODO Auto-generated constructor stub

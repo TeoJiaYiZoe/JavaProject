@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -31,5 +32,9 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 	List<LeaveApplication> checkOverlapLeave (@Param("startdate") LocalDate startdate, @Param("enddate") LocalDate enddate,
 			@Param("staffid") int staffid);
 	
+	@Transactional
+	@Modifying
+	@Query(value = "DELETE FROM LeaveApplication la where la.staff.staffId = :staffid")
+	void deleteLeaveForDeletedStaff(@Param("staffid") int staffid);
 	
 }

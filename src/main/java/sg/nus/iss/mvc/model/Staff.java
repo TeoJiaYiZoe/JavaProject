@@ -24,14 +24,14 @@ public class Staff {
 	@Column(name="id")
 	private int staffId;
 	@NotEmpty
-	@Size(min = 2, max =50)
+	@Size(min = 2, max =50, message="Staff name must be between {min} and {max}.")
 	@Column(name="name")
 	private String staffName;
 	@OneToOne
 	@JoinColumn(name="designation_id")
 	private Designation designation;
 	
-	@Length(min = 3)
+	@Length(min = 3, message="password must be more than {min} characters.")
 	private String password;
 	@OneToMany(targetEntity = LeaveApplication.class, mappedBy = "staff")
 	private Collection<LeaveApplication> leave_application;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:yh="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add a new Staff</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+<div align="center" class="appForm">
+	<h1>New Staff Form</h1>
+	<div align="left">
+	<form th:object="${staff}" th:action="@{/admin/staffs}" method="post">
+
+		<fieldset>
+			Staff name:<input type="text" th:field="*{staffName}">
+			<span th:if="${#fields.hasErrors('staffName')}" th:errors="*{staffName}">Name Error</span>
+			<input type="hidden" th:field="*{staffId}">
+		</fieldset>
+		<fieldset>
+			Staff designation:
+
+			<select th:field="*{designation.id}">
+				<option th:each="designation:${dlist}" th:value="${designation.id}"
+					th:text="${designation.designationName }" th:selected="${designation.id eq designation}"></option>
+			</select>
+		</fieldset>
+		<fieldset>
+			Select Manager
+			<select th:field="*{staff.staffId}">
+				<option th:each="boss:${bosslist}" th:value="${boss.staffId}"
+					th:text="${boss.staffName }" th:selected="${staff.staffId eq boss}"></option>
+			</select>
+		</fieldset>
+		<fieldset>
+			Set initial password:<input type="text" th:field="*{password}">
+			<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
+		</fieldset>
+		
+		<fieldset>
+			<input type="submit" name="Create">
+		</fieldset>
+	</form>
+	<a th:href="@{/admin/staff}">Back to main Staff page</a>
+	</div>
+	</div>
+</body>
+</html>

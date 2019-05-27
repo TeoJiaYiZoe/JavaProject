@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Update leave entitlement</title>
+<th:block th:replace="fragments/header"></th:block>
+<th:block th:replace="fragments/sidebar"></th:block>
+</head>
+<body>
+	<div align="center" class="appForm">
+		<h1>Update leave entitlement</h1>
+
+		</br>
+
+		<form th:action="@{/admin/updateleavebalance}" th:object="${leavebalance}"	method=post>
+
+		<fieldset>
+			Name: <input type="text" th:field="*{staffName}" readonly>			
+			<input type="hidden" th:field="*{staffId}">
+		</fieldset>
+		
+		<fieldset>
+			LeaveType: <input type="text" th:field="*{leavetypeName}" readonly>	
+			<input type="hidden" th:field="*{leavetypeId}">
+		</fieldset>
+		
+		<fieldset>
+			Leave Balance: <input type="text" th:field="*{leaveBalance}">
+			
+		</fieldset>
+		<fieldset>
+			<input type="submit" value="Submit Changes"></input>
+		</fieldset>
+	</form>
+
+	</div>
+</body>
+</html>

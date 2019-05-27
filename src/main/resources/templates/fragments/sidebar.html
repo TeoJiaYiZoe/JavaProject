@@ -14,12 +14,16 @@
   <a th:href="@{/leave}">My Leave History</a>
   <a th:href="@{/leave/balance}">My Leave Balance</a>  
   <span th:if="${session.User.getDesignation().getDesignationName() == 'Manager'}">
+  </br>
   <a th:href="@{/manager/leaverequest}">View Leave Application for Approval</a>
   <a th:href="@{/manager/leavehistory}">View Subordinates Leave History</a>
   </span>
   <span th:if="${session.User.getDesignation().getDesignationName() == 'Admin'}">
+  </br>
   <a th:href="@{/admin/holiday-main}">Manage public holidays</a>
   <a th:href="@{/admin/leavetype-main}">Manage leave types</a>
+  <a th:href="@{/admin/leavebalance-main}">Manage leave entitlement</a>
+  <a th:href="@{/admin/staff}">Manage staff</a>
   </span>
 </div>
 </body>

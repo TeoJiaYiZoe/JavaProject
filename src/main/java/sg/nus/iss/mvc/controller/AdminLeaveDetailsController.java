@@ -12,8 +12,7 @@ import sg.nus.iss.mvc.model.LeaveDetails;
 import sg.nus.iss.mvc.repo.LeaveDetailsRepository;
 
 @Controller
-@SessionAttributes("User")
-public class LeaveDetailsController {
+public class AdminLeaveDetailsController {
 	
 		private LeaveDetailsRepository ldRepo;
 
@@ -24,8 +23,6 @@ public class LeaveDetailsController {
 		}
 
 
-
-	
 		@RequestMapping(path="/admin/leavetype-main")
 		public String showLeaveTypeMainpage(Model model) {
 			
