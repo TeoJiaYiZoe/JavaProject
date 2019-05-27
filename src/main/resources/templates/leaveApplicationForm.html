@@ -32,13 +32,13 @@
 					<td>Start Date:</td>
 					<td><input type="date" th:field="*{startDate}" /></td>
 					<td th:if="${#fields.hasErrors('startDate')}"
-						th:errors="*{startDate}"></td>
+						th:errors="*{startDate}" style="color: red"></td>
 				</tr>
 				<tr>
 					<td>End Date:</td>
 					<td><input type="date" th:field="*{endDate}" /></td>
 					<td th:if="${#fields.hasErrors('endDate')}"
-						th:errors="*{endDate}"></td>
+						th:errors="*{endDate}" style="color: red"></td>
 				</tr>
 				<tr>
 					<td>Reason:</td>
@@ -59,7 +59,7 @@
 						th:errors="*{contact}"></td>
 				</tr>
 				<tr>
-					<td><input type="hidden" th:field="*{comment}"></td>
+					<td><input type="hidden" th:field="*{comment}" value="comment pls"></td>
 				</tr>
 
 			</tbody>

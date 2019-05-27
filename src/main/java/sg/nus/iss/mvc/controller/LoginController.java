@@ -1,5 +1,7 @@
 package sg.nus.iss.mvc.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,10 +39,16 @@ public class LoginController {
 		Staff staff = staffRepo.findByStaffName(User.getUsername());
 		if (staff.getPassword().equalsIgnoreCase(User.getPassword())) {
 			model.addAttribute("User", staff);
-			return "homepage";
+			return "redirect:/leave";
 		} else {
 			return "loginForm";
 		}
+	}
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+
 	}
 		
 }

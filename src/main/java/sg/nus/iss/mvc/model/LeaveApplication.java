@@ -39,7 +39,6 @@ public class LeaveApplication {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate endDate;
 	
-	@Size(min=5,max=100)
 	private String reason;
 	@Column(name="work_instruction")
 	private String workInstruction;
@@ -48,12 +47,13 @@ public class LeaveApplication {
 	@JoinColumn(name="LEAVETYPE_ID")
 	private LeaveType leavetype;
 	private String status;
-	
+	@NotEmpty
 	private String comment;
 	
 	public LeaveApplication() {
 		super();
 		this.status = "APPLIED";
+		this.comment = "comment please";
 		// TODO Auto-generated constructor stub
 	}
 	public LeaveApplication(Staff staff, LocalDate startDate, LocalDate endDate, String reason, String workInstruction,
@@ -67,7 +67,7 @@ public class LeaveApplication {
 		this.contact = contact;
 		this.leavetype = leavetype;
 		this.status = "APPLIED";
-		this.comment = comment;
+		this.comment = "comment please";
 	}
 	
 	public int getId() {

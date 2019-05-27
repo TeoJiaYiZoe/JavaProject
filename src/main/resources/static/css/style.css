@@ -5,6 +5,15 @@
   margin-left: 400px; 
   
 } */
+.formcontainer
+{
+	postion:absolute;
+	background:#fff;
+	top: 15vh;
+	padding:30px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px 0px #000;
+}
 
 body {
   padding: 0px;
