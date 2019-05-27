@@ -16,6 +16,7 @@
 				<tr>
 					<td>Staff Name:</td> 
 					<td><span th:text="${session.User.getStaffName()}"></span></td>
+					<td><input type="hidden" th:field="*{staff}" value="${session.User}"></td>
 				</tr>
 				<tr>
 					<td>Leave Type:</td>

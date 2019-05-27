@@ -12,14 +12,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.nus.iss.mvc.model.Holiday;
+import sg.nus.iss.mvc.model.LeaveApplication;
+import sg.nus.iss.mvc.model.LeaveBalance;
+import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.repo.HolidayRepository;
+import sg.nus.iss.mvc.repo.LeaveBalanceRepository;
 
 @Service
-public class HolidayServiceImpl implements HolidayService{
+public class HolidayServiceImpl implements HolidayService {
 
 	@Resource
 	private HolidayRepository holidayRepo;
-	
+	@Resource
+	private LeaveBalanceRepository leaveBalanceRepo;
+
 	@Override
 	@Transactional
 	public int findLeaveDaysWithoutHoliday(LocalDate start, LocalDate end) {
@@ -38,14 +44,49 @@ public class HolidayServiceImpl implements HolidayService{
 			
 			tempdate = tempdate.plusDays(1);
 		}
-		//for(Holiday h: holidays) {
-		//	if(h.getDate().isAfter(start) && h.getDate().isBefore(end)) {
-		//		res--;
-		//	}
-		//	else if(h.getDate().isEqual(start) || h.getDate().isEqual(end)){
-		//		res--;
-		//	}
-		//}
 		return res;
+	}
+
+	@Override
+	@Transactional
+	public boolean isBalanceEnough(LeaveApplication la) {
+		LeaveBalance lb = leaveBalanceRepo.findByStaffAndLeavetype(la.getStaff(), la.getLeavetype());
+		int balance = lb.getBalance();
+		int leavedays = findLeaveDaysWithoutHoliday(la.getStartDate(), la.getEndDate());
+		if (leavedays >= balance) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	@Transactional
+	public List<LocalDate> findAllDate() {
+		return holidayRepo.findAllDate();
+	}
+
+	@Override
+	@Transactional
+	public boolean isWorkingDay(LeaveApplication la) {
+		LocalDate start = la.getStartDate();
+		LocalDate end = la.getEndDate();
+		// LocalDate tempdate = LocalDate.of(start.getYear(), start.getMonthValue(),
+		// start.getDayOfMonth());
+		List<LocalDate> holidays = holidayRepo.findAllDate();
+		// while (!tempdate.isAfter(end)) {
+		if (holidays.contains(start) || start.getDayOfWeek().equals(DayOfWeek.SUNDAY)
+				|| start.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+			return false;
+		} else if (holidays.contains(end) || end.getDayOfWeek().equals(DayOfWeek.SUNDAY)
+				|| end.getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+			return false;
+		}
+		// }
+		// tempdate = tempdate.plusDays(1);
+		// }
+		else {
+			return true;
+		}
+
 	}
 }

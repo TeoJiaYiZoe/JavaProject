@@ -34,10 +34,11 @@ public class LeaveApplication {
 	@Column(name="start_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate startDate;
+	
 	@Column(name="end_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate endDate;
-	@NotEmpty
+	
 	@Size(min=5,max=100)
 	private String reason;
 	@Column(name="work_instruction")

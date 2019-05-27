@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,9 @@ import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.repo.LeaveApplicationRepository;
 import sg.nus.iss.mvc.repo.LeaveTypeRepository;
 import sg.nus.iss.mvc.service.HolidayService;
+import sg.nus.iss.mvc.service.LeaveApplicationService;
 import sg.nus.iss.mvc.service.LeaveBalanceService;
+import sg.nus.iss.mvc.validator.LeaveApplicationValidator;
 
 @Controller
 @SessionAttributes("User")
@@ -33,6 +37,16 @@ public class EmployeeController {
 	private LeaveBalanceService leaveBalanceSer;
 	@Autowired
 	private HolidayService holidaySer;
+	@Autowired
+	private LeaveApplicationService leaveApplicationSer;
+
+	@Autowired
+	private LeaveApplicationValidator laValidator;
+
+	@InitBinder("leave_application")
+	private void initBinder(WebDataBinder binder) {
+		binder.setValidator(laValidator);
+	}
 
 	@Autowired
 	public void setLeaveApplicationRepo(LeaveApplicationRepository leave_applicationRepo) {
@@ -50,36 +64,36 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(path = "/leave/apply", method = RequestMethod.GET)
-	public String createLeaveApplication(Model model) {
-		model.addAttribute("leave_application", new LeaveApplication());
+	public String createLeaveApplication(Model model,@ModelAttribute("User") Staff staff) {
+		LeaveApplication la = new LeaveApplication();
+		la.setStaff(staff);
+		model.addAttribute("leave_application",la);
 		List<LeaveType> leave_types = leave_typeRepo.findAll();
 		model.addAttribute("leave_types", leave_types);
 		return "leaveApplicationForm";
 	}
 
 	@RequestMapping(path = "/leaveApplication/submit", method = RequestMethod.POST)
-	public String saveApplication(Model model, @ModelAttribute("leave_application") @Valid LeaveApplication leave_application, BindingResult bindingResult,
+	public String saveApplication(Model model,
+			@Valid @ModelAttribute("leave_application") LeaveApplication leave_application, BindingResult bindingResult,
 			@ModelAttribute("User") Staff staff) {
-		if (bindingResult.hasErrors()) {
-			
-			List<LeaveType> leave_types = leave_typeRepo.findAll();
-			model.addAttribute("leave_types", leave_types);
-			
-    		return "leaveApplicationForm";
-    	}
 		leave_application.setStaff(staff);
+		List<LeaveType> leave_types = leave_typeRepo.findAll();
+		model.addAttribute("leave_types", leave_types);
+		if (bindingResult.hasErrors()) {
+			return "leaveApplicationForm";
+		}
+
 		LeaveBalance lb = leaveBalanceSer.findByStaffAndLeavetype(staff, leave_application.getLeavetype());
 		int balance = lb.getBalance();
 		int leavedays = holidaySer.findLeaveDaysWithoutHoliday(leave_application.getStartDate(),
 				leave_application.getEndDate());
 		if (leavedays <= balance) {
-			int bal = balance-leavedays;
+			int bal = balance - leavedays;
 			leave_applicationRepo.save(leave_application);
 			leaveBalanceSer.saveBalanceByStaffAndType(leave_application.getLeavetype(), bal, staff);
-			return "redirect:/leave";
-		} else {
-			return "insufficientLeaveBalanceErrorPage";
 		}
+		return "redirect:/leave";
 	}
 	
 	@RequestMapping(path = "/leave/balance")
