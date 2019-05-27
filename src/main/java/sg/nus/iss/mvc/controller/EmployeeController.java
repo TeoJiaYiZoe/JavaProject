@@ -102,7 +102,6 @@ public class EmployeeController {
 				// return "HomePage";
 			} else
 				return "cannottakemorethanoneday";
-
 		}
 		if (leavedays <= balance && (leave_application.getLeavetype().getTypeId() != 3
 				|| leave_application.getLeavetype().getTypeId() != 4)) {
