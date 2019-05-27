@@ -46,4 +46,9 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 	@Query(value = "DELETE FROM LeaveApplication la where la.staff.staffId = :staffid")
 	void deleteLeaveForDeletedStaff(@Param("staffid") int staffid);
 	
+	@Transactional
+	@Modifying
+	@Query(value = "DELETE FROM LeaveApplication la where la.leavetype.typeId = :leavetypeid")
+	public void deleteApplicationForDeletedLeaveType(@Param("leavetypeid") Integer leavetypeid);
+	
 }

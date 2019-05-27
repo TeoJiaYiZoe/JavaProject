@@ -87,6 +87,25 @@ h2 {
   text-align: center;
 }
 
+.abclass{
+  position:absolute;
+  margin-top: 15px;
+  margin-right: 20px;
+  margin-left: 20px;
+  text-decoration: none;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 16px;
+  padding: 16px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .bclass:hover {
   background-color: #b3b3cc;
   color: white;

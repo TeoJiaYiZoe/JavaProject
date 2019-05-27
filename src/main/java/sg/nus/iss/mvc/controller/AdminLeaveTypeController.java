@@ -54,7 +54,7 @@ public class AdminLeaveTypeController {
 	
 	@RequestMapping(path="/admin/leavetype/delete/{id}", method = RequestMethod.GET)
 	public String deleteLeaveType(@PathVariable("id") Integer leavetypeid) {
-		///delete from LeaveBalance, from LeaveDetails, and finally from LeaveType 
+		///delete from LeaveApplication, LeaveBalance, from LeaveDetails, and finally from LeaveType 
 		ltService.deleteType(leavetypeid);
 		return "redirect:/admin/leavetype-main";
 	}

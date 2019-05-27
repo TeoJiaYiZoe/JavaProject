@@ -15,6 +15,7 @@ import sg.nus.iss.mvc.model.LeaveDetails;
 import sg.nus.iss.mvc.model.LeaveType;
 import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.repo.DesignationRepository;
+import sg.nus.iss.mvc.repo.LeaveApplicationRepository;
 import sg.nus.iss.mvc.repo.LeaveBalanceRepository;
 import sg.nus.iss.mvc.repo.LeaveDetailsRepository;
 import sg.nus.iss.mvc.repo.LeaveTypeRepository;
@@ -33,6 +34,8 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
 	private LeaveBalanceRepository lbRepo;
 	@Resource
 	private StaffRepository staffRepo;
+	@Resource
+	private LeaveApplicationRepository laRepo;
 	
 	public LeaveDetailsBean createDetailsBean(Integer leavetypeid, Integer designationid) {
 		LeaveDetailsBean ldbean = new LeaveDetailsBean();
@@ -80,8 +83,12 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
 	}
 	
 	public void deleteType(Integer leavetypeid) {
+		laRepo.deleteApplicationForDeletedLeaveType(leavetypeid);
+		
 		lbRepo.deleteBalanceForDeletedLeaveType(leavetypeid);
+		
 		ldRepo.deleteDetailsForDeletedLeaveType(leavetypeid);
+		
 		ltRepo.deleteById(leavetypeid);
 	}
 	

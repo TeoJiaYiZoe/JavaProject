@@ -19,12 +19,12 @@
 		<div class="row justify-content-center">
 			<div class="col-12 col-sm-4 col-d-3 formcontainer ">
 	
-	<h1 class="text-center">Login Form</h1>
+	<h1 class="text-center">Login Page</h1>
 
 
 	<form th:object="${User}" th:action="@{/homepage}" method="post">
 		<fieldset class="form-group">
-			<label class="col-4 col-form-label"> Name</label>
+			<label class="col-4 col-form-label"> Username</label>
 			<input type="text" th:field="*{username}">
 		</fieldset>
 	
