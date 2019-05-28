@@ -1,5 +1,8 @@
 package sg.nus.iss.mvc.controller;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import sg.nus.iss.mvc.model.LeaveApplication;
@@ -217,5 +221,19 @@ public class EmployeeController {
 		leave_applicationRepo.save(la);
 		leaveBalanceSer.saveBalanceByStaffAndType(la.getLeavetype(), bal, s);
 		return "redirect:/leave";
+	}
+	@RequestMapping(path = "/movementRegister", method = RequestMethod.GET)
+	public String movementReg(Model model) {
+		LocalDate today = LocalDate.now();
+		int month = today.getMonthValue();
+		List<LeaveApplication> listLeave = leave_applicationRepo.checkMonthLeave(month);
+		model.addAttribute("listLeave", listLeave);
+		return "movementReg";
+	}
+	@RequestMapping(path = "/movementReg/selectedMonth", method = RequestMethod.POST)
+	public String movementRegByMonth(@RequestParam("selectedMonth") int month, Model model) {
+		List<LeaveApplication> listLeave = leave_applicationRepo.checkMonthLeave(month);
+		model.addAttribute("listLeave", listLeave);
+		return "movementReg";
 	}
 }

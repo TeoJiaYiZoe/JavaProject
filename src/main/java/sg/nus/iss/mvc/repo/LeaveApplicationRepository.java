@@ -41,6 +41,10 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 	List<LeaveApplication> checkOverlapLeave (@Param("startdate") LocalDate startdate, @Param("enddate") LocalDate enddate,
 			@Param("staffid") int staffid);
 	
+	@Query(value= "select la from LeaveApplication la where month(la.endDate) = :month  and  month(la.startDate) = :month "
+			+ "and la.status='APPLIED'")
+	List<LeaveApplication> checkMonthLeave (@Param("month") int month);
+	
 	@Transactional
 	@Modifying
 	@Query(value = "DELETE FROM LeaveApplication la where la.staff.staffId = :staffid")

@@ -12,7 +12,8 @@
 <div class="sidenav">
   <a th:href="@{/leave/apply}">Apply Leave</a>
   <a th:href="@{/leave}">My Leave History</a>
-  <a th:href="@{/leave/balance}">My Leave Balance</a>  
+  <a th:href="@{/leave/balance}">My Leave Balance</a>
+  <a th:href="@{/movementRegister}">Movement Register</a>  
   <span th:if="${session.User.getDesignation().getDesignationName() == 'Manager'}">
   </br>
   <a th:href="@{/manager/leaverequest}">View Leave Application for Approval</a>
