@@ -23,6 +23,7 @@ import sg.nus.iss.mvc.model.LeaveType;
 import sg.nus.iss.mvc.model.Staff;
 import sg.nus.iss.mvc.repo.LeaveApplicationRepository;
 import sg.nus.iss.mvc.repo.LeaveTypeRepository;
+import sg.nus.iss.mvc.repo.StaffRepository;
 import sg.nus.iss.mvc.service.HolidayService;
 import sg.nus.iss.mvc.service.LeaveApplicationService;
 import sg.nus.iss.mvc.service.LeaveBalanceService;
@@ -40,7 +41,7 @@ public class EmployeeController {
 	private HolidayService holidaySer;
 	@Autowired
 	private LeaveApplicationService leaveApplicationSer;
-
+	private StaffRepository staff_typeRepo;
 	@Autowired
 	private MailService mailService;
 
@@ -57,6 +58,10 @@ public class EmployeeController {
 		this.leave_applicationRepo = leave_applicationRepo;
 	}
 
+	@Autowired
+	public void setStaff_typeRepo(StaffRepository staff_typeRepo) {
+		this.staff_typeRepo = staff_typeRepo;
+	}
 	@Autowired
 	public void setLeaveTypeRepo(LeaveTypeRepository leave_typeRepo) {
 		this.leave_typeRepo = leave_typeRepo;
@@ -111,7 +116,9 @@ public class EmployeeController {
 			// return "HomePage";
 
 		}
-		Staff from = leave_application.getStaff();
+		//Staff from = leave_application.getStaff();
+		int sid = leave_application.getStaff().getStaffId();
+    	Staff from = staff_typeRepo.findByStaffId(sid);
 		mailService.sendApplyLeaveMail(from.getEmail(), from.getStaff().getEmail());
 
 		return "redirect:/leave";

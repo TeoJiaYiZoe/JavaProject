@@ -25,7 +25,7 @@ public class MailServiceImpl implements MailService {
 
 		try {
 			mailSender.send(simpleMessage);
-			logger.info("Your application has been sent. ");
+			logger.info("Your application has been sent. To"+to);
 		} catch (Exception e) {
 			logger.error("Error occur!", e);
 		}

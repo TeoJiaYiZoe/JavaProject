@@ -81,7 +81,9 @@ public class ManagerController {
 	    	leave_applicationRepo.save(leave_application);
 	    	int sid = leave_application.getStaff().getStaffId();
 	    	Staff from = staff_typeRepo.findByStaffId(sid);
-	    	mailService.sendLeaveUpdateMail(from.getEmail(), from.getStaff().getEmail());
+	    	mailService.sendLeaveUpdateMail(from.getStaff().getEmail(), from.getEmail());
+	    	System.out.println(from.getStaff().getEmail());
+	    	System.out.println(from.getEmail());
 	        return "redirect:/manager/leaverequest";
 	    }
 	    @RequestMapping(path = "manager/leaverequest", method = RequestMethod.GET)
