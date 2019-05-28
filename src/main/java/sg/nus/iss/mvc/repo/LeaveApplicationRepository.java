@@ -42,7 +42,7 @@ public interface LeaveApplicationRepository extends JpaRepository<LeaveApplicati
 			@Param("staffid") int staffid);
 	
 	@Query(value= "select la from LeaveApplication la where month(la.endDate) = :month  and  month(la.startDate) = :month "
-			+ "and la.status='APPLIED'")
+			+ "and la.status='APPROVED'")
 	List<LeaveApplication> checkMonthLeave (@Param("month") int month);
 	
 	@Transactional

@@ -232,8 +232,11 @@ public class EmployeeController {
 	}
 	@RequestMapping(path = "/movementReg/selectedMonth", method = RequestMethod.POST)
 	public String movementRegByMonth(@RequestParam("monthDropDown") int month, Model model) {
-		List<LeaveApplication> listLeave = leave_applicationRepo.checkMonthLeave(month);
-		model.addAttribute("listLeave", listLeave);
+		if (month != 0) {
+			List<LeaveApplication> listLeave = leave_applicationRepo.checkMonthLeave(month);
+			model.addAttribute("listLeave", listLeave);
+		}
 		return "movementReg";
+		
 	}
 }
