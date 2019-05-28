@@ -1,3 +1,8 @@
+DROP SCHEMA IF EXISTS team12;
+CREATE SCHEMA team12;
+
+USE team12;
+
 DROP TABLE IF EXISTS HOLIDAY_LIST;
 DROP TABLE IF EXISTS DESIGNATION_LEAVE;
 DROP TABLE IF EXISTS LEAVE_APPLICATION;
@@ -210,4 +215,5 @@ VALUES ('10', '2019-09-11','2019-09-13', 'holiday','NIL','98765333','1','APPLIED
 
 ALTER TABLE `team12`.`staff` 
 ADD COLUMN `EMAIL` VARCHAR(255) NULL AFTER `BOSS_ID`;
-UPDATE `team12`.`staff` SET `EMAIL` = 'fairytukpan@gmail.com' WHERE (`ID` = '1');
+UPDATE `team12`.`staff` SET `EMAIL` = 'fairytukpan@gmail.com' WHERE (`ID` = '5');
+UPDATE `team12`.`staff` SET `EMAIL` = 'elfie.me@gmail.com' WHERE (`ID` = '2');

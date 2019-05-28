@@ -21,11 +21,11 @@ public class MailServiceImpl implements MailService {
 		simpleMessage.setFrom(from);
 		simpleMessage.setTo(to);
 		simpleMessage.setSubject("Leave Appilication");
-		simpleMessage.setText("You have received a new leave application.");
+		simpleMessage.setText("You have received a new leave application. Please visit http://localhost:8080/login to check");
 
 		try {
 			mailSender.send(simpleMessage);
-			logger.info("Your application has been sent. Please visit http://localhost:8080/login to check");
+			logger.info("Your application has been sent. ");
 		} catch (Exception e) {
 			logger.error("Error occur!", e);
 		}
