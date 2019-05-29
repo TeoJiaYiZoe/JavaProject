@@ -135,7 +135,7 @@ INSERT INTO team12.leave_balance VALUES ('1','7','12');
 INSERT INTO team12.leave_balance VALUES ('2','7','60');
 INSERT INTO team12.leave_balance VALUES ('1','8','18');
 INSERT INTO team12.leave_balance VALUES ('2','8','60');
-INSERT INTO team12.leave_balance VALUES ('1','9','18');
+INSERT INTO team12.leave_balance VALUES ('1','9','15');
 INSERT INTO team12.leave_balance VALUES ('2','9','60');
 INSERT INTO team12.leave_balance VALUES ('1','10','15');
 INSERT INTO team12.leave_balance VALUES ('2','10','60');
@@ -210,6 +210,8 @@ INSERT INTO team12.leave_application (STAFF_ID, START_DATE, END_DATE, REASON, WO
 VALUES ('7', '2019-09-11','2019-09-13', 'holiday','NIL','98765333','1','APPLIED','pending');
 INSERT INTO team12.leave_application (STAFF_ID, START_DATE, END_DATE, REASON, WORK_INSTRUCTION, CONTACT, LEAVETYPE_ID, STATUS, COMMENT)
 VALUES ('10', '2019-09-11','2019-09-13', 'holiday','NIL','98765333','1','APPLIED','pending');
+INSERT INTO team12.leave_application (STAFF_ID, START_DATE, END_DATE, REASON, WORK_INSTRUCTION, CONTACT, LEAVETYPE_ID, STATUS, COMMENT)
+VALUES ('9', '2019-06-17','2019-06-19', 'holiday','NIL','98765337','1','APPROVED','Enjoy your Holiday.');
 
 
 
